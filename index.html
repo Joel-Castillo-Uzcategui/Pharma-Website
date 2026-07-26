@@ -3,24 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Uzcat — Clinical Consulting Company</title>
+<title>UzcaTech AB — Clinical & Medical Affairs Consulting</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#16233B;
-    --navy-soft:#334463;
-    --slate:#5C7086;
-    --bg:#F6F5F1;
-    --bg-panel:#ECEAE3;
-    --teal:#3D6E63;
-    --teal-soft:#E4ECE9;
-    --amber:#C4922E;
-    --ink:#1B2029;
-    --line:#D8D5CC;
+    --navy:#0F3D4A;
+    --navy-soft:#3A6B78;
+    --slate:#5F8087;
+    --bg:#F5FBF9;
+    --bg-panel:#E5F3EE;
+    --teal:#2F9E6F;
+    --teal-soft:#DCF0E6;
+    --amber:#0F3D4A;
+    --ink:#16262A;
+    --line:#D3E6E0;
     --white:#FFFFFF;
-    --radius:2px;
+    --radius-sm:10px;
+    --radius-md:18px;
+    --radius-lg:32px;
+    --radius:var(--radius-sm);
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -32,6 +35,7 @@
     font-size:16px;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
   h1,h2,h3{
     font-family:'Fraunces', serif;
@@ -46,24 +50,51 @@
   .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
   @media (max-width:640px){ .wrap{padding:0 20px;} }
 
+  /* ---------- Placeholder art slots ---------- */
+  /* Swap any .placeholder-box for a real <img> tag with the same class removed. */
+  .placeholder-box{
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    border:1px dashed var(--slate); background:rgba(92,112,134,0.06);
+    color:var(--slate); font-family:'IBM Plex Mono',monospace; font-size:11px;
+    letter-spacing:0.04em; line-height:1.5; padding:8px; border-radius:var(--radius-sm);
+  }
+
+  /* ---------- Scroll-reveal ---------- */
+  .reveal{
+    opacity:0; transform:translateY(28px);
+    transition:opacity .8s cubic-bezier(.16,.8,.24,1), transform .8s cubic-bezier(.16,.8,.24,1);
+  }
+  .reveal.in-view{opacity:1; transform:translateY(0);}
+  .reveal-stagger.in-view .stagger-item{opacity:1; transform:translateY(0);}
+  .stagger-item{
+    opacity:0; transform:translateY(20px);
+    transition:opacity .7s cubic-bezier(.16,.8,.24,1), transform .7s cubic-bezier(.16,.8,.24,1);
+  }
+  .stagger-item:nth-child(1){transition-delay:.02s;}
+  .stagger-item:nth-child(2){transition-delay:.10s;}
+  .stagger-item:nth-child(3){transition-delay:.18s;}
+  .stagger-item:nth-child(4){transition-delay:.26s;}
+  .stagger-item:nth-child(5){transition-delay:.34s;}
+  .stagger-item:nth-child(6){transition-delay:.42s;}
+
   /* ---------- Header ---------- */
   header{
     position:sticky; top:0; z-index:50;
-    background:rgba(246,245,241,0.92);
+    background:rgba(245,251,249,0.92);
     backdrop-filter:blur(6px);
     border-bottom:1px solid var(--line);
   }
   .nav{
     display:flex; align-items:center; justify-content:space-between;
-    padding:18px 0;
+    padding:16px 0;
   }
   .brand{
     font-family:'Fraunces', serif; font-size:19px; color:var(--navy);
-    display:flex; align-items:baseline; gap:8px;
+    display:flex; align-items:center; gap:10px;
   }
-  .brand .mark{
-    font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--white);
-    background:var(--navy); padding:3px 6px; border-radius:2px;
+  .brand .logo-slot{
+    width:34px; height:34px; flex-shrink:0;
+    font-size:9px;
   }
   nav ul{list-style:none; display:flex; gap:32px; margin:0; padding:0;}
   nav ul a{
@@ -73,10 +104,10 @@
   nav ul a:hover{color:var(--teal);}
   .nav-cta{
     font-size:14px; font-weight:600; color:var(--white);
-    background:var(--navy); padding:10px 18px; border-radius:2px;
-    text-decoration:none; white-space:nowrap;
+    background:var(--navy); padding:10px 18px; border-radius:var(--radius-sm);
+    text-decoration:none; white-space:nowrap; transition:background .15s ease, transform .15s ease;
   }
-  .nav-cta:hover{background:var(--teal);}
+  .nav-cta:hover{background:var(--teal); transform:translateY(-1px);}
   .menu-toggle{display:none;}
   @media (max-width:800px){
     nav ul{display:none;}
@@ -84,7 +115,28 @@
   }
 
   /* ---------- Hero ---------- */
-  .hero{padding:88px 0 64px; position:relative;}
+  .hero{padding:88px 0 64px; position:relative; overflow:hidden;}
+  /* BACKGROUND IMAGE SLOT — hero
+     To add a full-bleed background photo, set the background-image below
+     (a local path like url('images/hero-bg.jpg') or a full URL both work). */
+  .hero-bg{
+    position:absolute; inset:0; z-index:0;
+    background-image:url('');
+    background-size:cover; background-position:center;
+  }
+  .hero-bg::after{
+    content:""; position:absolute; inset:0;
+    /* Overlay tints any photo so the hero text stays readable — lighten/darken as needed */
+    background:linear-gradient(180deg, rgba(245,251,249,0.93), rgba(245,251,249,0.88));
+  }
+  .hero .wrap{position:relative; z-index:1;}
+  .hero-columns{display:grid; grid-template-columns:1.15fr 0.85fr; gap:48px; align-items:center;}
+  @media (max-width:900px){
+    .hero-columns{grid-template-columns:1fr;}
+    .hero-image{order:-1; margin-bottom:8px;}
+  }
+  /* Replace with: <img class="hero-image" src="images/hero-portrait.jpg" alt="..."> */
+  .hero-image{width:100%; aspect-ratio:4/5; border-radius:var(--radius-lg);}
   .eyebrow{
     font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em;
     text-transform:uppercase; color:var(--teal); margin-bottom:18px; display:flex; align-items:center; gap:10px;
@@ -95,104 +147,213 @@
   .hero p.lede{
     max-width:560px; font-size:18px; color:var(--navy-soft); margin-top:22px;
   }
-  .hero-actions{display:flex; gap:16px; margin-top:34px; flex-wrap:wrap;}
+  .hero-cta-group{display:flex; flex-direction:column; align-items:flex-start; gap:18px; margin-top:34px;}
+  .hero-actions{display:flex; gap:16px; flex-wrap:wrap;}
   .btn-primary{
-    background:var(--amber); color:var(--navy); font-weight:600; font-size:15px;
-    padding:14px 26px; text-decoration:none; border-radius:2px; transition:transform .15s ease;
+    background:var(--amber); color:var(--white); font-weight:600; font-size:15px;
+    padding:14px 26px; text-decoration:none; border-radius:var(--radius-sm); transition:transform .15s ease, box-shadow .15s ease;
     display:inline-block;
   }
-  .btn-primary:hover{transform:translateY(-1px);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 8px 20px rgba(15,61,74,0.35);}
   .btn-secondary{
     border:1px solid var(--navy-soft); color:var(--navy); font-weight:500; font-size:15px;
-    padding:13px 24px; text-decoration:none; border-radius:2px;
+    padding:13px 24px; text-decoration:none; border-radius:var(--radius-sm); transition:border-color .15s ease, color .15s ease;
   }
-  .hero-stats{
-    display:flex; gap:0; margin-top:56px; border-top:1px solid var(--line); padding-top:28px;
-    flex-wrap:wrap;
+  .btn-secondary:hover{border-color:var(--teal); color:var(--teal);}
+  .btn-tertiary{
+    display:inline-flex; align-items:center; gap:8px; color:var(--teal); font-weight:600; font-size:15px;
+    text-decoration:none; padding:13px 4px; transition:gap .15s ease;
   }
-  .hero-stats div{padding-right:44px; margin-right:44px; border-right:1px solid var(--line);}
-  .hero-stats div:last-child{border-right:none;}
-  .hero-stats .num{font-family:'Fraunces',serif; font-size:30px; color:var(--navy);}
-  .hero-stats .lbl{font-size:13px; color:var(--slate); margin-top:4px;}
+  .btn-tertiary:hover{gap:12px;}
+
+  /* Hero load-in choreography */
+  .hero-anim{opacity:0; transform:translateY(18px); animation:heroIn .9s cubic-bezier(.16,.8,.24,1) forwards;}
+  .hero .eyebrow{animation-delay:.05s;}
+  .hero h1{animation-delay:.15s;}
+  .hero p.lede{animation-delay:.3s;}
+  .hero-cta-group{animation-delay:.42s;}
+  .hero-image{animation-delay:.2s;}
+  @keyframes heroIn{ to{ opacity:1; transform:translateY(0); } }
 
   /* ---------- Evidence trail (signature element) ---------- */
-  .trail{padding:90px 0 100px; background:var(--bg-panel); position:relative;}
-  .trail-head{max-width:600px; margin-bottom:64px;}
-  .trail-head .eyebrow{color:var(--amber);}
-  .trail-head .eyebrow::before{background:var(--amber);}
-  .trail-head h2{font-size:34px;}
-  .trail-head p{color:var(--navy-soft); margin-top:14px; font-size:16px;}
+  .trail{padding:90px 0 100px; background:var(--navy); position:relative; overflow:hidden;}
+  .trail-head{max-width:600px; margin-bottom:40px;}
+  .trail-head .eyebrow{color:var(--teal);}
+  .trail-head .eyebrow::before{background:var(--teal);}
+  .trail-head h2{font-size:34px; color:var(--white);}
+  .trail-head p{color:rgba(255,255,255,0.75); margin-top:14px; font-size:16px;}
+
+  .trail-layout{
+    display:grid; grid-template-columns:680px 1fr; gap:0; align-items:stretch;
+  }
+  @media (max-width:1000px){ .trail-layout{grid-template-columns:1fr;} }
+  .trail-content{min-width:0; padding-left:32px; padding-right:40px;}
+  @media (max-width:1000px){ .trail-content{padding-left:20px; padding-right:20px;} }
+  /* Replace the .placeholder-box class on the trail-image element with an <img> tag once you have a photo.
+     If using a real <img>, add style="height:100%; width:100%; object-fit:cover;" so it still fills the column
+     and bleeds to the right edge of the viewport. */
+  .trail-image{
+    width:100%; height:100%; min-height:480px;
+    margin-right:64px;
+    border-radius:var(--radius-lg);
+    background-size:cover; background-position:center;
+    border-color:rgba(255,255,255,0.35); color:rgba(255,255,255,0.7); background-color:rgba(255,255,255,0.06);
+  }
+  @media (max-width:1000px){
+    .trail-image{height:auto; aspect-ratio:4/3; min-height:0; margin-top:8px; margin-right:0; border-radius:var(--radius-lg);}
+  }
 
   .spine{position:relative; padding-left:0;}
   .spine::before{
     content:""; position:absolute; left:19px; top:8px; bottom:8px; width:1px;
-    background:linear-gradient(var(--teal), var(--amber));
+    background:rgba(255,255,255,0.18);
+  }
+  .spine-fill{
+    content:""; position:absolute; left:19px; top:8px; width:1px; height:0%;
+    background:linear-gradient(var(--teal), rgba(255,255,255,0.85));
+    transition:height .1s linear;
   }
   .phase{
     display:grid; grid-template-columns:40px 1fr; gap:0 28px; padding-bottom:48px; position:relative;
   }
   .phase:last-child{padding-bottom:0;}
   .phase-marker{
-    width:40px; height:40px; border-radius:50%; background:var(--bg-panel);
+    width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.06);
     border:1px solid var(--teal); display:flex; align-items:center; justify-content:center;
     font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--teal); font-weight:500;
-    z-index:1;
+    z-index:1; transition:background .3s ease, color .3s ease, transform .3s ease;
   }
+  .phase.lit .phase-marker{background:var(--teal); color:var(--white); transform:scale(1.08);}
   .phase-body{padding-top:4px;}
   .phase-body .tag{
     font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase;
-    letter-spacing:0.08em; color:var(--slate); margin-bottom:6px;
+    letter-spacing:0.08em; color:rgba(255,255,255,0.55); margin-bottom:6px;
   }
-  .phase-body h3{font-size:20px; font-weight:600; margin-bottom:8px;}
-  .phase-body p{color:var(--navy-soft); font-size:15px; max-width:600px;}
+  .phase-body h3{font-size:20px; font-weight:600; margin-bottom:8px; color:var(--white);}
+  .phase-body p{color:rgba(255,255,255,0.75); font-size:15px; max-width:600px;}
 
   /* ---------- Services ---------- */
-  .services{padding:100px 0;}
+  .services{padding:100px 0; position:relative; overflow:hidden;}
+  /* BACKGROUND IMAGE SLOT — services ("What I do")
+     Set the background-image below to fill the section behind the bubbles. */
+  .services-bg{
+    position:absolute; inset:0; z-index:0;
+    background-image:url('');
+    background-size:cover; background-position:center;
+  }
+  .services-bg::after{
+    content:""; position:absolute; inset:0;
+    /* Overlay tints any photo so the bubbles and text stay legible — adjust opacity as needed */
+    background:rgba(245,251,249,0.88);
+  }
+  .services .wrap{position:relative; z-index:1;}
   .section-head{max-width:600px; margin-bottom:56px;}
   .section-head h2{font-size:34px;}
   .section-head p{color:var(--navy-soft); margin-top:14px;}
-  .service-grid{
-    display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
-    background:var(--line); border:1px solid var(--line);
+  .service-scatter{
+    position:relative; width:100%;
+    min-height:clamp(440px, 42vw, 620px);
+    margin-top:8px;
   }
-  @media (max-width:800px){ .service-grid{grid-template-columns:1fr 1fr;} }
-  @media (max-width:520px){ .service-grid{grid-template-columns:1fr;} }
-  .service{background:var(--bg); padding:32px 28px; min-height:190px;}
-  .service .idx{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--amber);}
-  .service h3{font-size:17px; font-weight:600; margin-top:14px; margin-bottom:10px;}
-  .service p{font-size:14px; color:var(--slate);}
+  .service-lines{
+    position:absolute; inset:0; width:100%; height:100%;
+    overflow:visible;
+  }
+  .service-lines line{
+    stroke:var(--teal); stroke-opacity:0.35; stroke-width:0.25;
+  }
+  .service{
+    position:absolute; transform:translate(-50%, -50%); z-index:1;
+    background:var(--bg-panel); width:clamp(150px, 15vw, 190px); aspect-ratio:1;
+    border-radius:50%; border:1px solid var(--line); padding:22px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+    transition:background .25s ease, box-shadow .25s ease, transform .25s ease;
+  }
+  .service:hover{background:var(--white); box-shadow:0 12px 28px rgba(15,61,74,0.1); transform:translate(-50%, -50%) scale(1.04);}
+  .service.hub{
+    z-index:2; background:var(--navy); border:none;
+    width:clamp(170px, 18vw, 220px);
+    box-shadow:0 16px 34px rgba(15,61,74,0.25);
+  }
+  .service.hub h3{color:var(--white); font-size:16px; margin:0;}
+  .service.hub:hover{transform:translate(-50%, -50%) scale(1.04); background:var(--navy);}
+  .service h3{font-size:14px; font-weight:600; margin-top:10px; margin-bottom:8px; line-height:1.25;}
+  .service p{font-size:11.5px; color:var(--slate); line-height:1.4;}
+  @media (max-width:800px){
+    .service-scatter{
+      min-height:auto; display:flex; flex-direction:column; align-items:center; gap:28px;
+    }
+    .service-lines{display:none;}
+    .service{position:static; transform:none; margin:0 auto; width:min(78vw, 260px);}
+    .service.hub{order:-1; width:min(60vw, 200px);}
+    .service:hover{transform:none;}
+    .service.hub:hover{transform:none;}
+  }
 
-  /* ---------- About ---------- */
-  .about{padding:100px 0; background:var(--navy); color:var(--bg);}
-  .about-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:start;}
-  @media (max-width:800px){ .about-grid{grid-template-columns:1fr; gap:40px;} }
-  .about h2{color:var(--white); font-size:32px;}
-  .about .eyebrow{color:#8FB6AB;}
-  .about .eyebrow::before{background:#8FB6AB;}
-  .about-bio p{color:#C7CEDA; font-size:15.5px; margin-top:16px;}
-  .credentials{list-style:none; margin:28px 0 0; padding:0; border-top:1px solid rgba(255,255,255,0.15);}
-  .credentials li{
-    display:flex; justify-content:space-between; padding:14px 0;
-    border-bottom:1px solid rgba(255,255,255,0.15); font-size:14.5px;
+  /* ---------- Experts ---------- */
+  .experts{padding:100px 0; background:var(--navy);}
+  .experts .eyebrow{color:var(--teal);}
+  .experts .eyebrow::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--teal);}
+  .experts h2{font-size:clamp(30px, 4vw, 44px); line-height:1.12; max-width:680px; color:var(--white);}
+  .experts h2 .accent{color:var(--teal); display:block;}
+
+  .expert-showcase{
+    display:grid; grid-template-columns:1.1fr 1fr; gap:56px; align-items:center; margin-top:56px;
   }
-  .credentials li span:first-child{color:#8FB6AB; font-family:'IBM Plex Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.06em;}
-  .tags{display:flex; flex-wrap:wrap; gap:10px; margin-top:28px;}
-  .tag-pill{
-    border:1px solid rgba(255,255,255,0.3); color:#DCE3EC; font-size:12.5px;
-    padding:6px 12px; border-radius:20px; font-family:'IBM Plex Mono',monospace;
+  @media (max-width:800px){ .expert-showcase{grid-template-columns:1fr; gap:32px;} }
+
+  .expert-photo{
+    width:100%; aspect-ratio:4/5; max-width:420px;
+    border-radius:260px 260px var(--radius-md) var(--radius-md);
+    border:1px dashed rgba(255,255,255,0.35); color:rgba(255,255,255,0.7);
+    background:rgba(255,255,255,0.06); filter:grayscale(55%) contrast(1.02);
+  }
+  .expert-info{padding-top:8px;}
+  .expert-name{font-size:28px; color:var(--teal);}
+  .expert-role{font-size:16px; color:rgba(255,255,255,0.75); margin-top:8px;}
+  .read-more{
+    display:inline-flex; align-items:center; gap:8px; margin-top:20px;
+    color:var(--teal); font-weight:600; font-size:15px; text-decoration:none; transition:gap .15s ease;
+  }
+  .read-more:hover{gap:12px;}
+
+  .expert-stats-row{
+    display:flex; gap:48px; flex-wrap:wrap;
+    margin-top:32px; padding-top:22px; border-top:1px solid rgba(255,255,255,0.18);
+  }
+  .expert-stat{}
+  .expert-stat .num{font-family:'Fraunces',serif; font-size:32px; color:var(--teal); font-variant-numeric:tabular-nums;}
+  .expert-stat .languages-list{font-family:'Fraunces',serif; font-size:20px; color:var(--teal); line-height:1.25;}
+  .expert-stat .lbl{font-size:13px; color:rgba(255,255,255,0.6); margin-top:4px;}
+
+  .expert-details{margin-top:8px;}
+  .expert-logos-block{margin-top:28px;}
+  .logos-label{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase;
+    letter-spacing:0.06em; color:rgba(255,255,255,0.55); margin-bottom:12px;
+  }
+  .logo-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .inst-logo{width:92px; height:56px; font-size:9.5px; flex-shrink:0; border-color:rgba(255,255,255,0.35); color:rgba(255,255,255,0.7); background:rgba(255,255,255,0.06);}
+
+  .cert-bar{
+    margin-top:64px; padding-top:32px; border-top:1px solid rgba(255,255,255,0.18);
+    display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;
+  }
+  .cert-item{width:150px; height:56px; font-size:10px; flex-shrink:0; border-color:rgba(255,255,255,0.35); color:rgba(255,255,255,0.7); background:rgba(255,255,255,0.06);}
+  @media (max-width:640px){
+    .cert-bar{justify-content:flex-start;}
   }
 
   /* ---------- CTA band ---------- */
-  .cta-band{background:var(--teal); color:var(--white); padding:64px 0; text-align:center;}
-  .cta-band h2{color:var(--white); font-size:30px; margin-bottom:16px;}
-  .cta-band p{color:var(--teal-soft); max-width:480px; margin:0 auto 30px;}
+  .contact-lead{max-width:720px; margin-bottom:56px;}
+  .contact-lead h2{font-size:34px;}
+  .contact-lead p{color:var(--navy-soft); margin-top:14px; font-size:16px;}
 
   /* ---------- Contact ---------- */
   .contact{padding:100px 0;}
   .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px;}
   @media (max-width:800px){ .contact-grid{grid-template-columns:1fr; gap:40px;} }
-  .contact-info h2{font-size:32px;}
-  .contact-info p{color:var(--navy-soft); margin-top:16px; max-width:420px;}
+  .contact-info p{color:var(--navy-soft); margin-top:0; max-width:420px;}
   .contact-detail{margin-top:32px;}
   .contact-detail div{display:flex; gap:14px; padding:12px 0; border-top:1px solid var(--line); font-size:14.5px;}
   .contact-detail div span:first-child{width:90px; font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; color:var(--slate); letter-spacing:0.06em; flex-shrink:0; padding-top:2px;}
@@ -201,7 +362,8 @@
   label{font-size:12px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.06em; color:var(--slate); margin-bottom:6px; display:block;}
   input, textarea{
     width:100%; border:1px solid var(--line); background:var(--white); padding:12px 14px;
-    font-family:'IBM Plex Sans', sans-serif; font-size:15px; border-radius:2px; color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif; font-size:15px; border-radius:var(--radius-sm); color:var(--ink);
+    transition:border-color .15s ease;
   }
   input:focus, textarea:focus{outline:2px solid var(--teal); outline-offset:1px; border-color:var(--teal);}
   textarea{resize:vertical; min-height:110px;}
@@ -209,10 +371,13 @@
   @media (max-width:520px){ .form-row{grid-template-columns:1fr;} }
   button.submit{
     background:var(--navy); color:var(--white); border:none; padding:14px 24px;
-    font-weight:600; font-size:15px; border-radius:2px; cursor:pointer; width:fit-content;
-    font-family:'IBM Plex Sans',sans-serif;
+    font-weight:600; font-size:15px; border-radius:var(--radius-sm); cursor:pointer; width:fit-content;
+    font-family:'IBM Plex Sans',sans-serif; transition:background .15s ease, transform .15s ease;
   }
-  button.submit:hover{background:var(--teal);}
+  button.submit:hover{background:var(--teal); transform:translateY(-1px);}
+  .form-status{font-size:14px; margin-top:-4px; display:none;}
+  .form-status.success{color:var(--teal); display:block;}
+  .form-status.error{color:#B3452C; display:block;}
 
   footer{border-top:1px solid var(--line); padding:36px 0; }
   .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
@@ -223,7 +388,8 @@
 
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
-    *{transition:none !important;}
+    *{animation-duration:.001ms !important; animation-delay:0s !important; transition-duration:.001ms !important;}
+    .reveal, .stagger-item, .hero-anim{opacity:1 !important; transform:none !important;}
   }
 </style>
 </head>
@@ -231,138 +397,196 @@
 
 <header>
   <div class="wrap nav">
-    <div class="brand"><span class="mark">UCC</span> Best Mama Ever</div>
+    <div class="brand">
+      <div class="logo-slot placeholder-box">LOGO</div>
+      UzcaTech AB
+    </div>
     <nav><ul>
       <li><a href="#services">Services</a></li>
       <li><a href="#approach">Approach</a></li>
-      <li><a href="#about">About</a></li>
+      <li><a href="#experts">Experts</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul></nav>
-    <a class="nav-cta" href="#contact">Book a call</a>
   </div>
 </header>
 
 <section class="hero">
+  <!-- Replace the empty url('') for .hero-bg above with your image path -->
+  <div class="hero-bg"></div>
   <div class="wrap">
-    <div class="eyebrow">Clinical &amp; Medical Affairs Consulting</div>
-    <h1>*Write nice pitch for potential visiting clients*</h1>
-    <p class="lede">Independent clinical and medical affairs support for biotech and pharma teams — from XXX design and YYY to ZZZ, grounded Nordic, EU +Oxford.</p>
-    <div class="hero-actions">
-      <a class="btn-primary" href="#contact">Book a consultation</a>
-      <a class="btn-secondary" href="#services">See services</a>
-    </div>
-    <div class="hero-stats">
-      <div><div class="num">100+</div><div class="lbl">years in clinical &amp; medical affairs</div></div>
-      <div><div class="num">10000</div><div class="lbl">studies supported/conducted (IDK you write you pitch here)</div></div>
-      <div><div class="num">50</div><div class="lbl">therapeutic areas</div></div>
+    <div class="hero-columns">
+      <div class="hero-text">
+        <div class="eyebrow hero-anim">Clinical &amp; Medical Affairs Consulting</div>
+        <h1 class="hero-anim">Independent clinical expertise, <em>embedded</em> exactly where your programme needs it.</h1>
+        <p class="lede hero-anim">Hands-on clinical and medical affairs support for biotech and pharma teams — from protocol design and KOL engagement to publication strategy and regulatory interactions. Grounded in Nordic and EU practice, with an Oxford research background.</p>
+        <div class="hero-cta-group hero-anim">
+          <!-- Placeholder: links to a future standalone "About the company" page -->
+          <a class="btn-tertiary" href="company.html">Read more about the company <span aria-hidden="true">→</span></a>
+          <div class="hero-actions">
+            <a class="btn-primary" href="#contact">Book a consultation</a>
+            <a class="btn-secondary" href="#services">See services</a>
+          </div>
+        </div>
+      </div>
+      <!-- Replace with: <img class="hero-image" src="images/hero-portrait.jpg" alt="..."> -->
+      <div class="hero-image placeholder-box hero-anim">IMAGE</div>
     </div>
   </div>
 </section>
 
 <section class="trail" id="approach">
-  <div class="wrap">
-    <div class="trail-head">
-      <div class="eyebrow">How engagements run<br> Here its a little bit more up to you how you want it</div>
-      <h2>Support mapped to where your programme actually is.</h2>
-      <p>Medical affairs needs change by phase — I work project-by-project or as ongoing embedded support, joining wherever the current gap is.</p>
+  <div class="trail-layout">
+    <div class="trail-content">
+      <div class="trail-head reveal">
+        <div class="eyebrow">How engagements run</div>
+        <h2>Support mapped to where your programme actually is.</h2>
+        <p>Medical affairs needs change by phase — I work project-by-project or as ongoing embedded support, joining wherever the current gap is.</p>
+      </div>
+      <div class="spine" id="spine">
+        <div class="spine-fill" id="spine-fill"></div>
+        <div class="phase reveal">
+          <div class="phase-marker">I</div>
+          <div class="phase-body">
+            <div class="tag">Early phase · I–II</div>
+            <h3>Protocol &amp; strategy design</h3>
+            <p>Working alongside your team from the earliest stages to shape study design, endpoints, and overall medical strategy so the programme starts on solid footing.</p>
+          </div>
+        </div>
+        <div class="phase reveal">
+          <div class="phase-marker">II</div>
+          <div class="phase-body">
+            <div class="tag">Mid phase · II–III</div>
+            <h3>Medical &amp; scientific engagement</h3>
+            <p>Leading KOL engagement, advisory boards, and scientific communications as the programme moves toward pivotal data.</p>
+          </div>
+        </div>
+        <div class="phase reveal">
+          <div class="phase-marker">III</div>
+          <div class="phase-body">
+            <div class="tag">Late phase · III</div>
+            <h3>Regulatory &amp; publication support</h3>
+            <p>Supporting submission-ready documentation, medical writing, and publication planning as results mature.</p>
+          </div>
+        </div>
+        <div class="phase reveal">
+          <div class="phase-marker">IV</div>
+          <div class="phase-body">
+            <div class="tag">Post-project · IV</div>
+            <h3>Post-approval &amp; lifecycle support</h3>
+            <p>Continued medical affairs input after launch — HCP education, real-world evidence generation, and lifecycle planning.</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="spine">
-      <div class="phase">
-        <div class="phase-marker">I</div>
-        <div class="phase-body">
-          <div class="tag">Early phase · I–II</div>
-          <h3>Planning</h3>
-          <p>Here, we sit and have fika while settign the layout for the project</p>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="phase-marker">II</div>
-        <div class="phase-body">
-          <div class="tag">Mid phase · II–III</div>
-          <h3>Dance</h3>
-          <p>Here we dance and get the energy up</p>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="phase-marker">III</div>
-        <div class="phase-body">
-          <div class="tag">Late phase · III</div>
-          <h3>Here we actually work</h3>
-          <p>Boring part</p>
-        </div>
-      </div>
-      <div class="phase">
-        <div class="phase-marker">IV</div>
-        <div class="phase-body">
-          <div class="tag">Post-project · IV</div>
-          <h3>We have another fika here</h3>
-          <p>I know they are so good</p>
-        </div>
-      </div>
-    </div>
+    <!-- Replace with: <img class="trail-image" src="images/approach.jpg" alt="..."> -->
+    <div class="trail-image placeholder-box reveal">IMAGE</div>
   </div>
 </section>
 
 <section class="services" id="services">
+  <!-- Replace the empty url('') for .services-bg above with your image path -->
+  <div class="services-bg"></div>
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="eyebrow">What I do</div>
       <h2>Clinical &amp; medical affairs, end to end.</h2>
       <p>Engagements are scoped individually — a single deliverable, an interim role, or ongoing advisory support.</p>
     </div>
-    <div class="service-grid">
-      <div class="service"><div class="idx">01</div><h3>Cooks amazing</h3><p>Don't forget when she bakes too...</p></div>
-      <div class="service"><div class="idx">02</div><h3>Very patient ... except when the lepe comes (Nicole knows)</h3><p>Blah blah blah LEPE!!!</p></div>
-      <div class="service"><div class="idx">03</div><h3>Dances really well</h3><p>Thanks for teaching me how to dance mama, I think the Zumba also agrees</p></div>
-      <div class="service"><div class="idx">04</div><h3>Is the best consultant worldwide</h3><p>I think Mama is smartest</p></div>
-      <div class="service"><div class="idx">05</div><h3>Main text</h3><p>More detailed</p></div>
-      <div class="service"><div class="idx">06</div><h3>. . .</h3><p>. . .</p></div>
+    <div class="service-scatter reveal">
+      <svg class="service-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <line x1="52" y1="45" x2="9" y2="30" />
+        <line x1="52" y1="45" x2="25" y2="68" />
+        <line x1="52" y1="45" x2="38" y2="8" />
+        <line x1="52" y1="45" x2="70" y2="82" />
+        <line x1="52" y1="45" x2="80" y2="24" />
+        <line x1="52" y1="45" x2="92" y2="62" />
+      </svg>
+      <div class="service hub" style="left:52%; top:45%;"><h3>PharmaSciences</h3></div>
+      <div class="service" style="left:9%; top:30%;"><h3>Protocol design &amp; study strategy</h3><p>Study design, endpoints, and feasibility input from day one.</p></div>
+      <div class="service" style="left:25%; top:68%;"><h3>Medical monitoring &amp; clinical oversight</h3><p>Ongoing clinical review and safety oversight during trials.</p></div>
+      <div class="service" style="left:38%; top:8%;"><h3>KOL engagement &amp; advisory boards</h3><p>Identifying and coordinating key opinion leaders and panels.</p></div>
+      <div class="service" style="left:70%; top:82%;"><h3>Medical writing &amp; publications</h3><p>Manuscripts, abstracts, and scientific communications.</p></div>
+      <div class="service" style="left:80%; top:24%;"><h3>Regulatory &amp; scientific affairs support</h3><p>Medical input into submissions and agency interactions.</p></div>
+      <div class="service" style="left:92%; top:62%;"><h3>Interim &amp; embedded medical affairs roles</h3><p>Senior medical affairs capacity, without a full-time hire.</p></div>
     </div>
   </div>
 </section>
 
-<section class="about" id="about">
-  <div class="wrap about-grid">
-    <div>
-      <div class="eyebrow">About</div>
-      <h2>Nathalie Uzcat, MD/PhD</h2>
-      <div class="about-bio">
-        <p>[Clinical background and reputation</p>
-      </div>
-      <div class="tags">
-        <span class="tag-pill">best mama</span>
-        <span class="tag-pill">Very cool</span>
-        <span class="tag-pill">Helps poor children</span>
-        <span class="tag-pill">Very strong</span>
-      </div>
-    </div>
-    <div>
-      <ul class="credentials">
-        <li><span>Based in</span><span>Staffanstorp, Sweden</span></li>
-        <li><span>Languages</span><span>Spanish, English</span></li>
-        <li><span>Education</span><span>[Degrees, Institutions, Years]</span></li>
-        <li><span>Previous roles</span><span>[Company / Title, Company / Title]</span></li>
-        <li><span>Certifications</span><span>[All the certifications]</span></li>
-        <li><span>Engagement model</span><span>Project, retained advisory, Whatever I missed</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="cta-band">
+<section class="experts" id="experts">
   <div class="wrap">
-    <h2>Have a study that needs support from professional consultancy?</h2>
-    <p>Tell me about the programme adn your needs. Response will arrive within two business days with next steps.</p>
-    <a class="btn-primary" href="#contact">Get in touch</a>
+    <div class="eyebrow reveal">Available now</div>
+    <h2 class="reveal">Looking for support?<span class="accent">Experts available now.</span></h2>
+
+    <div class="expert-showcase reveal">
+      <!-- Replace this div with: <img class="expert-photo" src="mothers-photo.jpg" alt="Nathalie Uzcat"> -->
+      <div class="expert-photo placeholder-box">MOTHER'S<br>PROFILE PHOTO</div>
+      <div class="expert-info">
+        <h3 class="expert-name">Nathalie Uzcat, MD/PhD</h3>
+        <div class="expert-role">Clinical &amp; Medical Affairs Consultant</div>
+        <!-- Placeholder: links to a future standalone bio page with even more
+             detail (case studies, publications, etc). Core info stays inline below. -->
+        <a class="read-more" href="experts/nathalie-uzcat.html">Read more <span aria-hidden="true">→</span></a>
+
+        <!-- Edit data-count-to to Nathalie's real number of years -->
+        <div class="expert-stats-row">
+          <div class="expert-stat">
+            <div class="num" data-count-to="15" data-suffix="+">0</div>
+            <div class="lbl">years of clinical &amp; medical affairs experience</div>
+          </div>
+          <div class="expert-stat">
+            <!-- Edit to Nathalie's real spoken languages -->
+            <div class="languages-list">Swedish, Spanish, English</div>
+            <div class="lbl">languages spoken</div>
+          </div>
+        </div>
+
+        <div class="expert-details">
+          <!-- Replace each placeholder-box with: <img class="inst-logo" src="..." alt="University name"> -->
+          <div class="expert-logos-block">
+            <div class="logos-label">Formal education</div>
+            <div class="logo-row">
+              <div class="inst-logo placeholder-box">UNIVERSITY<br>LOGO 1</div>
+              <div class="inst-logo placeholder-box">UNIVERSITY<br>LOGO 2</div>
+              <div class="inst-logo placeholder-box">UNIVERSITY<br>LOGO 3</div>
+            </div>
+          </div>
+
+          <!-- Replace each placeholder-box with: <img class="inst-logo" src="..." alt="Company name"> -->
+          <div class="expert-logos-block">
+            <div class="logos-label">Previous companies</div>
+            <div class="logo-row">
+              <div class="inst-logo placeholder-box">COMPANY<br>LOGO 1</div>
+              <div class="inst-logo placeholder-box">COMPANY<br>LOGO 2</div>
+              <div class="inst-logo placeholder-box">COMPANY<br>LOGO 3</div>
+              <div class="inst-logo placeholder-box">COMPANY<br>LOGO 4</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Replace each placeholder-box with: <img class="cert-item" src="..." alt="Certification name"> -->
+    <div class="cert-bar reveal">
+      <div class="cert-item placeholder-box">CERT 1</div>
+      <div class="cert-item placeholder-box">CERT 2</div>
+      <div class="cert-item placeholder-box">CERT 3</div>
+      <div class="cert-item placeholder-box">CERT 4</div>
+      <div class="cert-item placeholder-box">CERT 5</div>
+      <div class="cert-item placeholder-box">CERT 6</div>
+    </div>
   </div>
 </section>
+
 
 <section class="contact" id="contact">
-  <div class="wrap contact-grid">
-    <div class="contact-info">
+  <div class="wrap">
+    <div class="contact-lead reveal">
       <div class="eyebrow">Contact</div>
-      <h2>Start a conversation.</h2>
-      <p>Reach out directly, or use the form — I read every message myself and reply within two business days.</p>
+      <h2>Have a study that needs support from a professional consultancy?</h2>
+    </div>
+    <div class="contact-grid">
+    <div class="contact-info reveal">
+      <p>Reach out directly, or use the form — every message is emailed to me directly and I reply within two business days.</p>
       <div class="contact-detail">
         <div><span>Email</span><span>Business.hotmail@domain.se</span></div>
         <div><span>Phone</span><span>[+46 XX XXX XX XX]</span></div>
@@ -370,7 +594,18 @@
         <div><span>LinkedIn</span><span>linkedin.com/in/yourlink</span></div>
       </div>
     </div>
-    <form action="mailto:Business.hotmail@domain.se" method="post" enctype="text/plain">
+
+    <!--
+      FORM SETUP — READ ME
+      Free, no-subscription option: Google Apps Script.
+      1. Create a Google Sheet, open Extensions > Apps Script, paste in the
+         apps-script.gs code, set your real Hotmail address in NOTIFY_EMAIL,
+         then Deploy > New deployment > Web app (Execute as: Me, Access: Anyone).
+      2. Paste the resulting /exec URL into the form action below.
+      Every submission then gets logged as a row in your sheet AND emailed
+      straight to the Hotmail address — no third-party account, no cost, ever.
+    -->
+    <form id="contact-form" class="reveal" action="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec" method="POST">
       <div class="form-row">
         <div><label for="name">Name</label><input id="name" name="name" type="text" required></div>
         <div><label for="company">Company</label><input id="company" name="company" type="text"></div>
@@ -378,20 +613,118 @@
       <div><label for="email">Email</label><input id="email" name="email" type="email" required></div>
       <div><label for="message">What are you looking for support with?</label><textarea id="message" name="message" required></textarea></div>
       <button class="submit" type="submit">Send message</button>
+      <p id="form-status" class="form-status"></p>
     </form>
+    </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap footer-row">
-    <div class="mono">© 2026 Best Mama Clinical Consulting</div>
+    <div class="mono">© 2026 UzcaTech AB — Clinical &amp; Medical Affairs Consulting</div>
     <ul class="footer-links">
       <li><a href="#services">Services</a></li>
-      <li><a href="#about">About</a></li>
+      <li><a href="#experts">Experts</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </footer>
+
+<script>
+  // ---------- Scroll-reveal (fade + rise on entry) ----------
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // ---------- Hero stat count-up ----------
+  const counters = document.querySelectorAll('[data-count-to]');
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const to = parseInt(el.getAttribute('data-count-to'), 10);
+      const suffix = el.getAttribute('data-suffix') || '';
+      const duration = 1200;
+      const start = performance.now();
+      function tick(now){
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * to).toLocaleString('en-US') + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      countObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(el => countObserver.observe(el));
+
+  // ---------- Timeline spine: fills as the approach section scrolls through view ----------
+  const spine = document.getElementById('spine');
+  const spineFill = document.getElementById('spine-fill');
+  const phases = document.querySelectorAll('.phase');
+  function updateSpine(){
+    const rect = spine.getBoundingClientRect();
+    const viewportH = window.innerHeight;
+    const total = rect.height;
+    // progress: 0 when spine top enters bottom of viewport, 1 when spine bottom reaches ~40% of viewport
+    const start = viewportH * 0.85;
+    const end = viewportH * 0.4;
+    const traveled = start - rect.top;
+    const span = (rect.height + start - end);
+    let progress = traveled / span;
+    progress = Math.max(0, Math.min(1, progress));
+    spineFill.style.height = (progress * 100) + '%';
+
+    phases.forEach(phase => {
+      const pRect = phase.getBoundingClientRect();
+      if (pRect.top < viewportH * 0.65){
+        phase.classList.add('lit');
+      }
+    });
+  }
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking){
+      requestAnimationFrame(() => { updateSpine(); ticking = false; });
+      ticking = true;
+    }
+  });
+  window.addEventListener('resize', updateSpine);
+  updateSpine();
+
+  // ---------- Contact form submit ----------
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    status.className = 'form-status';
+    status.textContent = '';
+    const data = new FormData(form);
+    try {
+      // Google Apps Script doesn't return readable CORS headers, so we
+      // submit in "no-cors" mode — the request still goes through and
+      // triggers the email/log, we just can't read the response back.
+      await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        mode: 'no-cors'
+      });
+      status.textContent = 'Thanks — your message has been sent.';
+      status.className = 'form-status success';
+      form.reset();
+    } catch (err) {
+      status.textContent = 'Something went wrong. Please email directly instead.';
+      status.className = 'form-status error';
+    }
+  });
+</script>
 
 </body>
 </html>
