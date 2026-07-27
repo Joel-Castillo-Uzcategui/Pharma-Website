@@ -51,7 +51,6 @@
   @media (max-width:640px){ .wrap{padding:0 20px;} }
 
   /* ---------- Placeholder art slots ---------- */
-  /* Swap any .placeholder-box for a real <img> tag with the same class removed. */
   .placeholder-box{
     display:flex; align-items:center; justify-content:center; text-align:center;
     border:1px dashed var(--slate); background:rgba(92,112,134,0.06);
@@ -116,9 +115,6 @@
 
   /* ---------- Hero ---------- */
   .hero{padding:88px 0 64px; position:relative; overflow:hidden;}
-  /* BACKGROUND IMAGE SLOT — hero
-     To add a full-bleed background photo, set the background-image below
-     (a local path like url('images/hero-bg.jpg') or a full URL both work). */
   .hero-bg{
     position:absolute; inset:0; z-index:0;
     background-image:url('');
@@ -126,7 +122,6 @@
   }
   .hero-bg::after{
     content:""; position:absolute; inset:0;
-    /* Overlay tints any photo so the hero text stays readable — lighten/darken as needed */
     background:linear-gradient(180deg, rgba(245,251,249,0.93), rgba(245,251,249,0.88));
   }
   .hero .wrap{position:relative; z-index:1;}
@@ -135,7 +130,9 @@
     .hero-columns{grid-template-columns:1fr;}
     .hero-image{order:-1; margin-bottom:8px;}
   }
-  /* Replace with: <img class="hero-image" src="images/hero-portrait.jpg" alt="..."> */
+  @media (max-width:640px){
+    .hero-image{display:none;}
+  }
   .hero-image{width:100%; aspect-ratio:4/5; border-radius:var(--radius-lg);}
   .eyebrow{
     font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em;
@@ -166,7 +163,6 @@
   }
   .btn-tertiary:hover{gap:12px;}
 
-  /* Hero load-in choreography */
   .hero-anim{opacity:0; transform:translateY(18px); animation:heroIn .9s cubic-bezier(.16,.8,.24,1) forwards;}
   .hero .eyebrow{animation-delay:.05s;}
   .hero h1{animation-delay:.15s;}
@@ -175,7 +171,7 @@
   .hero-image{animation-delay:.2s;}
   @keyframes heroIn{ to{ opacity:1; transform:translateY(0); } }
 
-  /* ---------- Evidence trail (signature element) ---------- */
+  /* ---------- Evidence trail ---------- */
   .trail{padding:90px 0 100px; background:var(--navy); position:relative; overflow:hidden;}
   .trail-head{max-width:600px; margin-bottom:40px;}
   .trail-head .eyebrow{color:var(--teal);}
@@ -189,9 +185,6 @@
   @media (max-width:1000px){ .trail-layout{grid-template-columns:1fr;} }
   .trail-content{min-width:0; padding-left:32px; padding-right:40px;}
   @media (max-width:1000px){ .trail-content{padding-left:20px; padding-right:20px;} }
-  /* Replace the .placeholder-box class on the trail-image element with an <img> tag once you have a photo.
-     If using a real <img>, add style="height:100%; width:100%; object-fit:cover;" so it still fills the column
-     and bleeds to the right edge of the viewport. */
   .trail-image{
     width:100%; height:100%; min-height:480px;
     margin-right:64px;
@@ -201,6 +194,9 @@
   }
   @media (max-width:1000px){
     .trail-image{height:auto; aspect-ratio:4/3; min-height:0; margin-top:8px; margin-right:0; border-radius:var(--radius-lg);}
+  }
+  @media (max-width:640px){
+    .trail-image{display:none;}
   }
 
   .spine{position:relative; padding-left:0;}
@@ -234,8 +230,6 @@
 
   /* ---------- Services ---------- */
   .services{padding:100px 0; position:relative; overflow:hidden;}
-  /* BACKGROUND IMAGE SLOT — services ("What I do")
-     Set the background-image below to fill the section behind the bubbles. */
   .services-bg{
     position:absolute; inset:0; z-index:0;
     background-image:url('');
@@ -243,7 +237,6 @@
   }
   .services-bg::after{
     content:""; position:absolute; inset:0;
-    /* Overlay tints any photo so the bubbles and text stay legible — adjust opacity as needed */
     background:rgba(245,251,249,0.88);
   }
   .services .wrap{position:relative; z-index:1;}
@@ -334,6 +327,10 @@
   }
   .logo-row{display:flex; gap:14px; flex-wrap:wrap;}
   .inst-logo{width:92px; height:56px; font-size:9.5px; flex-shrink:0; border-color:rgba(255,255,255,0.35); color:rgba(255,255,255,0.7); background:rgba(255,255,255,0.06);}
+  @media (max-width:640px){
+    .logo-row{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px;}
+    .inst-logo{width:100%; height:64px;}
+  }
 
   .cert-bar{
     margin-top:64px; padding-top:32px; border-top:1px solid rgba(255,255,255,0.18);
@@ -341,7 +338,8 @@
   }
   .cert-item{width:150px; height:56px; font-size:10px; flex-shrink:0; border-color:rgba(255,255,255,0.35); color:rgba(255,255,255,0.7); background:rgba(255,255,255,0.06);}
   @media (max-width:640px){
-    .cert-bar{justify-content:flex-start;}
+    .cert-bar{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px;}
+    .cert-item{width:100%; height:64px;}
   }
 
   /* ---------- CTA band ---------- */
@@ -411,7 +409,6 @@
 </header>
 
 <section class="hero">
-  <!-- Replace the empty url('') for .hero-bg above with your image path -->
   <div class="hero-bg"></div>
   <div class="wrap">
     <div class="hero-columns">
@@ -420,7 +417,6 @@
         <h1 class="hero-anim">Independent clinical expertise, <em>embedded</em> exactly where your programme needs it.</h1>
         <p class="lede hero-anim">Hands-on clinical and medical affairs support for biotech and pharma teams — from protocol design and KOL engagement to publication strategy and regulatory interactions. Grounded in Nordic and EU practice, with an Oxford research background.</p>
         <div class="hero-cta-group hero-anim">
-          <!-- Placeholder: links to a future standalone "About the company" page -->
           <a class="btn-tertiary" href="company.html">Read more about the company <span aria-hidden="true">→</span></a>
           <div class="hero-actions">
             <a class="btn-primary" href="#contact">Book a consultation</a>
@@ -428,7 +424,6 @@
           </div>
         </div>
       </div>
-      <!-- Replace with: <img class="hero-image" src="images/hero-portrait.jpg" alt="..."> -->
       <div class="hero-image placeholder-box hero-anim">IMAGE</div>
     </div>
   </div>
@@ -478,13 +473,11 @@
         </div>
       </div>
     </div>
-    <!-- Replace with: <img class="trail-image" src="images/approach.jpg" alt="..."> -->
     <div class="trail-image placeholder-box reveal">IMAGE</div>
   </div>
 </section>
 
 <section class="services" id="services">
-  <!-- Replace the empty url('') for .services-bg above with your image path -->
   <div class="services-bg"></div>
   <div class="wrap">
     <div class="section-head reveal">
@@ -518,30 +511,24 @@
     <h2 class="reveal">Looking for support?<span class="accent">Experts available now.</span></h2>
 
     <div class="expert-showcase reveal">
-      <!-- Replace this div with: <img class="expert-photo" src="mothers-photo.jpg" alt="Nathalie Uzcat"> -->
       <div class="expert-photo placeholder-box">MOTHER'S<br>PROFILE PHOTO</div>
       <div class="expert-info">
         <h3 class="expert-name">Nathalie Uzcat, MD/PhD</h3>
         <div class="expert-role">Clinical &amp; Medical Affairs Consultant</div>
-        <!-- Placeholder: links to a future standalone bio page with even more
-             detail (case studies, publications, etc). Core info stays inline below. -->
         <a class="read-more" href="experts/nathalie-uzcat.html">Read more <span aria-hidden="true">→</span></a>
 
-        <!-- Edit data-count-to to Nathalie's real number of years -->
         <div class="expert-stats-row">
           <div class="expert-stat">
             <div class="num" data-count-to="15" data-suffix="+">0</div>
             <div class="lbl">years of clinical &amp; medical affairs experience</div>
           </div>
           <div class="expert-stat">
-            <!-- Edit to Nathalie's real spoken languages -->
             <div class="languages-list">Swedish, Spanish, English</div>
             <div class="lbl">languages spoken</div>
           </div>
         </div>
 
         <div class="expert-details">
-          <!-- Replace each placeholder-box with: <img class="inst-logo" src="..." alt="University name"> -->
           <div class="expert-logos-block">
             <div class="logos-label">Formal education</div>
             <div class="logo-row">
@@ -551,7 +538,6 @@
             </div>
           </div>
 
-          <!-- Replace each placeholder-box with: <img class="inst-logo" src="..." alt="Company name"> -->
           <div class="expert-logos-block">
             <div class="logos-label">Previous companies</div>
             <div class="logo-row">
@@ -565,7 +551,6 @@
       </div>
     </div>
 
-    <!-- Replace each placeholder-box with: <img class="cert-item" src="..." alt="Certification name"> -->
     <div class="cert-bar reveal">
       <div class="cert-item placeholder-box">CERT 1</div>
       <div class="cert-item placeholder-box">CERT 2</div>
@@ -595,23 +580,6 @@
       </div>
     </div>
 
-    <!--
-      FORM SETUP — READ ME
-      This form uses FormSubmit (https://formsubmit.co) — a free service
-      with zero setup: no account, no deployment, no backend to host.
-      Submissions are emailed straight to the address in the form's
-      action attribute below.
-
-      TO CHANGE THE DESTINATION EMAIL: just edit the address in the
-      action="https://formsubmit.co/..." attribute a few lines down —
-      that's the only place it needs to change.
-
-      FIRST-TIME ACTIVATION: the very first submission triggers a
-      one-time confirmation email to that address — click the link in
-      it to activate the form. Every submission after that arrives
-      directly, silently, with no email client ever opening for the
-      visitor.
-    -->
     <form id="contact-form" class="reveal" action="https://formsubmit.co/Joelcastuzca@hotmail.com" method="POST">
       <input type="hidden" name="_subject" value="New enquiry — UzcaTech AB website">
       <input type="hidden" name="_template" value="table">
@@ -642,7 +610,6 @@
 </footer>
 
 <script>
-  // ---------- Scroll-reveal (fade + rise on entry) ----------
   const revealEls = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -654,7 +621,6 @@
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(el => revealObserver.observe(el));
 
-  // ---------- Hero stat count-up ----------
   const counters = document.querySelectorAll('[data-count-to]');
   const countObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -676,7 +642,6 @@
   }, { threshold: 0.5 });
   counters.forEach(el => countObserver.observe(el));
 
-  // ---------- Timeline spine: fills as the approach section scrolls through view ----------
   const spine = document.getElementById('spine');
   const spineFill = document.getElementById('spine-fill');
   const phases = document.querySelectorAll('.phase');
@@ -684,7 +649,6 @@
     const rect = spine.getBoundingClientRect();
     const viewportH = window.innerHeight;
     const total = rect.height;
-    // progress: 0 when spine top enters bottom of viewport, 1 when spine bottom reaches ~40% of viewport
     const start = viewportH * 0.85;
     const end = viewportH * 0.4;
     const traveled = start - rect.top;
@@ -710,7 +674,6 @@
   window.addEventListener('resize', updateSpine);
   updateSpine();
 
-  // ---------- Contact form submit ----------
   const form = document.getElementById('contact-form');
   const status = document.getElementById('form-status');
   form.addEventListener('submit', async function (e) {
@@ -718,10 +681,6 @@
     status.className = 'form-status';
     status.textContent = '';
     const data = new FormData(form);
-    // FormSubmit's AJAX endpoint (formsubmit.co/ajax/<email>) mirrors the
-    // destination email in the form's action attribute, sends the email
-    // silently without redirecting the page, and returns a real JSON
-    // response so we can confirm success instead of just assuming it.
     const destination = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
     try {
       const response = await fetch(destination, {
