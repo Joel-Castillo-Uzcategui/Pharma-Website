@@ -105,6 +105,19 @@
     .inst-logo{width:100%; height:64px;}
   }
 
+  /* ---------- Certifications ---------- */
+  .certifications{padding:0 0 100px;}
+  .certifications .eyebrow{margin-bottom:24px;}
+  .cert-bar{
+    padding-top:32px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;
+  }
+  .cert-item{width:150px; height:56px; font-size:10px; flex-shrink:0;}
+  @media (max-width:640px){
+    .cert-bar{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px;}
+    .cert-item{width:100%; height:64px;}
+  }
+
   footer{border-top:1px solid var(--line); padding:36px 0;}
   .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
   .footer-row .mono{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--slate);}
@@ -165,6 +178,21 @@
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<section class="certifications">
+  <div class="wrap">
+    <div class="eyebrow">Certifications</div>
+    <!-- Replace each placeholder-box with: <img class="cert-item" src="..." alt="Certification name"> -->
+    <div class="cert-bar">
+      <div class="cert-item placeholder-box">CERT 1</div>
+      <div class="cert-item placeholder-box">CERT 2</div>
+      <div class="cert-item placeholder-box">CERT 3</div>
+      <div class="cert-item placeholder-box">CERT 4</div>
+      <div class="cert-item placeholder-box">CERT 5</div>
+      <div class="cert-item placeholder-box">CERT 6</div>
     </div>
   </div>
 </section>

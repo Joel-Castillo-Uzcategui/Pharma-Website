@@ -274,35 +274,62 @@
   .service.hub:hover{transform:translate(-50%, -50%) scale(1.04); background:var(--navy);}
   .service h3{font-size:14px; font-weight:600; margin-top:10px; margin-bottom:8px; line-height:1.25;}
   .service p{font-size:11.5px; color:var(--slate); line-height:1.4;}
-  @media (max-width:800px){
-    .service-scatter{
-      position:relative;
-      min-height:auto; display:flex; flex-direction:column; align-items:center; gap:28px;
-    }
-    .service-lines{display:none;}
-    .service.hub{display:none;}
-    .service{position:relative; z-index:1; transform:none; margin:0 auto; width:min(78vw, 260px);}
-    .service:hover{transform:none;}
+  @media (max-width:1024px){
+      .service-scatter{
+        position:relative;
+        min-height:auto;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:28px;
+      }
 
-    .service-spine, .service-spine-fill{
-      display:block; position:absolute; left:50%; width:1px;
-      top:calc(min(78vw, 260px) / 2);
-      transform:translateX(-50%);
-      z-index:0;
-    }
-    .service-spine{
-      bottom:calc(min(78vw, 260px) / 2);
-      background:var(--line);
-    }
-    .service-spine-fill{
-      height:0%;
-      background:linear-gradient(var(--teal), var(--teal-dark));
-      transition:height .1s linear;
-    }
+      .service-lines{display:none;}
+      .service.hub{display:none;}
 
-    .service.lit{background:var(--teal-dark); border-color:var(--teal-dark); box-shadow:0 10px 22px rgba(15,61,74,0.18);}
-    .service.lit h3{color:var(--white);}
-    .service.lit p{color:rgba(255,255,255,0.85);}
+      .service{
+        position:relative;
+        left:50%;
+        transform:translateX(-50%);
+        margin:0;
+        z-index:1;
+        width:min(78vw,260px);
+      }
+
+      .service:hover{
+        transform:translateX(-50%);
+      }
+
+      .service-spine,
+      .service-spine-fill{
+        display:block;
+        position:absolute;
+        left:50%;
+        width:1px;
+        top:calc(min(78vw,260px)/2);
+        transform:translateX(-50%);
+        z-index:0;
+      }
+
+      .service-spine{
+        bottom:calc(min(78vw,260px)/2);
+        background:var(--line);
+      }
+
+      .service-spine-fill{
+        height:0%;
+        background:linear-gradient(var(--teal), var(--teal-dark));
+        transition:height .1s linear;
+      }
+
+      .service.lit{
+        background:var(--teal-dark);
+        border-color:var(--teal-dark);
+        box-shadow:0 10px 22px rgba(15,61,74,0.18);
+      }
+
+      .service.lit h3{color:var(--white);}
+      .service.lit p{color:rgba(255,255,255,0.85);}
   }
 
   /* ---------- Experts ---------- */
