@@ -588,7 +588,7 @@
     <div class="contact-info reveal">
       <p>Reach out directly, or use the form — every message is emailed to me directly and I reply within two business days.</p>
       <div class="contact-detail">
-        <div><span>Email</span><span>Business.hotmail@domain.se</span></div>
+        <div><span>Email</span><span>Joelcastuzca@hotmail.com</span></div>
         <div><span>Phone</span><span>[+46 XX XXX XX XX]</span></div>
         <div><span>Location</span><span>Staffanstorp, Sweden — remote consultancy</span></div>
         <div><span>LinkedIn</span><span>linkedin.com/in/yourlink</span></div>
@@ -597,15 +597,25 @@
 
     <!--
       FORM SETUP — READ ME
-      Free, no-subscription option: Google Apps Script.
-      1. Create a Google Sheet, open Extensions > Apps Script, paste in the
-         apps-script.gs code, set your real Hotmail address in NOTIFY_EMAIL,
-         then Deploy > New deployment > Web app (Execute as: Me, Access: Anyone).
-      2. Paste the resulting /exec URL into the form action below.
-      Every submission then gets logged as a row in your sheet AND emailed
-      straight to the Hotmail address — no third-party account, no cost, ever.
+      This form uses FormSubmit (https://formsubmit.co) — a free service
+      with zero setup: no account, no deployment, no backend to host.
+      Submissions are emailed straight to the address in the form's
+      action attribute below.
+
+      TO CHANGE THE DESTINATION EMAIL: just edit the address in the
+      action="https://formsubmit.co/..." attribute a few lines down —
+      that's the only place it needs to change.
+
+      FIRST-TIME ACTIVATION: the very first submission triggers a
+      one-time confirmation email to that address — click the link in
+      it to activate the form. Every submission after that arrives
+      directly, silently, with no email client ever opening for the
+      visitor.
     -->
-    <form id="contact-form" class="reveal" action="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec" method="POST">
+    <form id="contact-form" class="reveal" action="https://formsubmit.co/Joelcastiuzca@hotmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New enquiry — UzcaTech AB website">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
       <div class="form-row">
         <div><label for="name">Name</label><input id="name" name="name" type="text" required></div>
         <div><label for="company">Company</label><input id="company" name="company" type="text"></div>
@@ -707,15 +717,18 @@
     status.className = 'form-status';
     status.textContent = '';
     const data = new FormData(form);
+    // FormSubmit's AJAX endpoint (formsubmit.co/ajax/<email>) mirrors the
+    // destination email in the form's action attribute, sends the email
+    // silently without redirecting the page, and returns a real JSON
+    // response so we can confirm success instead of just assuming it.
+    const destination = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
     try {
-      // Google Apps Script doesn't return readable CORS headers, so we
-      // submit in "no-cors" mode — the request still goes through and
-      // triggers the email/log, we just can't read the response back.
-      await fetch(form.action, {
+      const response = await fetch(destination, {
         method: 'POST',
         body: data,
-        mode: 'no-cors'
+        headers: { 'Accept': 'application/json' }
       });
+      if (!response.ok) throw new Error('Request failed');
       status.textContent = 'Thanks — your message has been sent.';
       status.className = 'form-status success';
       form.reset();
