@@ -15,6 +15,7 @@
     --bg:#F5FBF9;
     --bg-panel:#E5F3EE;
     --teal:#2F9E6F;
+    --teal-dark:#1B6E4C;
     --teal-soft:#DCF0E6;
     --amber:#0F3D4A;
     --ink:#16262A;
@@ -255,6 +256,7 @@
   .service-lines line{
     stroke:var(--teal); stroke-opacity:0.35; stroke-width:0.25;
   }
+  .service-spine, .service-spine-fill{display:none;}
   .service{
     position:absolute; transform:translate(-50%, -50%); z-index:1;
     background:var(--bg-panel); width:clamp(150px, 15vw, 190px); aspect-ratio:1;
@@ -274,13 +276,33 @@
   .service p{font-size:11.5px; color:var(--slate); line-height:1.4;}
   @media (max-width:800px){
     .service-scatter{
+      position:relative;
       min-height:auto; display:flex; flex-direction:column; align-items:center; gap:28px;
     }
     .service-lines{display:none;}
-    .service{position:static; transform:none; margin:0 auto; width:min(78vw, 260px);}
-    .service.hub{order:-1; width:min(60vw, 200px);}
+    .service.hub{display:none;}
+    .service{position:relative; z-index:1; transform:none; margin:0 auto; width:min(78vw, 260px);}
     .service:hover{transform:none;}
-    .service.hub:hover{transform:none;}
+
+    .service-spine, .service-spine-fill{
+      display:block; position:absolute; left:50%; width:1px;
+      top:calc(min(78vw, 260px) / 2);
+      transform:translateX(-50%);
+      z-index:0;
+    }
+    .service-spine{
+      bottom:calc(min(78vw, 260px) / 2);
+      background:var(--line);
+    }
+    .service-spine-fill{
+      height:0%;
+      background:linear-gradient(var(--teal), var(--teal-dark));
+      transition:height .1s linear;
+    }
+
+    .service.lit{background:var(--teal-dark); border-color:var(--teal-dark); box-shadow:0 10px 22px rgba(15,61,74,0.18);}
+    .service.lit h3{color:var(--white);}
+    .service.lit p{color:rgba(255,255,255,0.85);}
   }
 
   /* ---------- Experts ---------- */
@@ -485,7 +507,7 @@
       <h2>Clinical &amp; medical affairs, end to end.</h2>
       <p>Engagements are scoped individually — a single deliverable, an interim role, or ongoing advisory support.</p>
     </div>
-    <div class="service-scatter reveal">
+    <div class="service-scatter reveal" id="service-scatter">
       <svg class="service-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
         <line x1="52" y1="45" x2="9" y2="30" />
         <line x1="52" y1="45" x2="25" y2="68" />
@@ -494,6 +516,8 @@
         <line x1="52" y1="45" x2="80" y2="24" />
         <line x1="52" y1="45" x2="92" y2="62" />
       </svg>
+      <div class="service-spine" id="service-spine"></div>
+      <div class="service-spine-fill" id="service-spine-fill"></div>
       <div class="service hub" style="left:52%; top:45%;"><h3>PharmaSciences</h3></div>
       <div class="service" style="left:9%; top:30%;"><h3>Protocol design &amp; study strategy</h3><p>Study design, endpoints, and feasibility input from day one.</p></div>
       <div class="service" style="left:25%; top:68%;"><h3>Medical monitoring &amp; clinical oversight</h3><p>Ongoing clinical review and safety oversight during trials.</p></div>
@@ -664,15 +688,40 @@
       }
     });
   }
+
+  const serviceScatter = document.getElementById('service-scatter');
+  const serviceSpineFill = document.getElementById('service-spine-fill');
+  const serviceItems = document.querySelectorAll('.service:not(.hub)');
+  function updateServiceSpine(){
+    if (!serviceScatter || !serviceSpineFill) return;
+    const rect = serviceScatter.getBoundingClientRect();
+    const viewportH = window.innerHeight;
+    const start = viewportH * 0.85;
+    const end = viewportH * 0.4;
+    const traveled = start - rect.top;
+    const span = (rect.height + start - end);
+    let progress = traveled / span;
+    progress = Math.max(0, Math.min(1, progress));
+    serviceSpineFill.style.height = (progress * 100) + '%';
+
+    serviceItems.forEach(item => {
+      const iRect = item.getBoundingClientRect();
+      if (iRect.top < viewportH * 0.65){
+        item.classList.add('lit');
+      }
+    });
+  }
+
   let ticking = false;
   window.addEventListener('scroll', () => {
     if (!ticking){
-      requestAnimationFrame(() => { updateSpine(); ticking = false; });
+      requestAnimationFrame(() => { updateSpine(); updateServiceSpine(); ticking = false; });
       ticking = true;
     }
   });
-  window.addEventListener('resize', updateSpine);
+  window.addEventListener('resize', () => { updateSpine(); updateServiceSpine(); });
   updateSpine();
+  updateServiceSpine();
 
   const form = document.getElementById('contact-form');
   const status = document.getElementById('form-status');
