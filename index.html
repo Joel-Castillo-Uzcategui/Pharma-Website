@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UzcaTech AB — Clinical & Medical Affairs Consulting</title>
+<title>UzcaTech AB</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -94,7 +94,7 @@
   }
   .brand .logo-slot{
     width:34px; height:34px; flex-shrink:0;
-    font-size:9px;
+    object-fit:cover; border-radius:8px;
   }
   nav ul{list-style:none; display:flex; gap:32px; margin:0; padding:0;}
   nav ul a{
@@ -264,14 +264,14 @@
     display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
     transition:background .25s ease, box-shadow .25s ease, transform .25s ease;
   }
-  .service:hover{background:var(--white); box-shadow:0 12px 28px rgba(15,61,74,0.1); transform:translate(-50%, -50%) scale(1.04);}
+  .service:hover{transform:translate(-50%, -50%);}
   .service.hub{
     z-index:2; background:var(--navy); border:none;
     width:clamp(170px, 18vw, 220px);
     box-shadow:0 16px 34px rgba(15,61,74,0.25);
   }
   .service.hub h3{color:var(--white); font-size:16px; margin:0;}
-  .service.hub:hover{transform:translate(-50%, -50%) scale(1.04); background:var(--navy);}
+  .service.hub:hover{transform:translate(-50%, -50%); background:var(--navy);}
   .service h3{font-size:14px; font-weight:600; margin-top:10px; margin-bottom:8px; line-height:1.25;}
   .service p{font-size:11.5px; color:var(--slate); line-height:1.4;}
   @media (max-width:1024px){
@@ -289,15 +289,12 @@
 
       .service{
         position:relative;
-        left:50%;
-        transform:translateX(-50%);
+        left:auto !important;
+        top:auto !important;
+        transform:none !important;
         margin:0;
         z-index:1;
         width:min(78vw,260px);
-      }
-
-      .service:hover{
-        transform:translateX(-50%);
       }
 
       .service-spine,
@@ -325,7 +322,6 @@
       .service.lit{
         background:var(--teal-dark);
         border-color:var(--teal-dark);
-        box-shadow:0 10px 22px rgba(15,61,74,0.18);
       }
 
       .service.lit h3{color:var(--white);}
@@ -345,7 +341,7 @@
   @media (max-width:800px){ .expert-showcase{grid-template-columns:1fr; gap:32px;} }
 
   .expert-photo{
-    width:100%; aspect-ratio:4/5; max-width:420px;
+    width:100%; aspect-ratio:7/10; max-width:420px;
     border-radius:260px 260px var(--radius-md) var(--radius-md);
     border:1px dashed rgba(255,255,255,0.35); color:rgba(255,255,255,0.7);
     background:rgba(255,255,255,0.06); filter:grayscale(55%) contrast(1.02);
@@ -445,7 +441,7 @@
 <header>
   <div class="wrap nav">
     <div class="brand">
-      <div class="logo-slot placeholder-box">LOGO</div>
+      <img class="logo-slot" src="images/logo.png" alt="Nathalie Uzcategui">
       UzcaTech AB
     </div>
     <nav><ul>
@@ -462,9 +458,9 @@
   <div class="wrap">
     <div class="hero-columns">
       <div class="hero-text">
-        <div class="eyebrow hero-anim">Clinical &amp; Medical Affairs Consulting</div>
-        <h1 class="hero-anim">Independent clinical expertise, <em>embedded</em> exactly where your programme needs it.</h1>
-        <p class="lede hero-anim">Hands-on clinical and medical affairs support for biotech and pharma teams — from protocol design and KOL engagement to publication strategy and regulatory interactions. Grounded in Nordic and EU practice, with an Oxford research background.</p>
+        <div class="eyebrow hero-anim">[0.]Clinical &amp; Medical Affairs Consulting</div>
+        <h1 class="hero-anim">[1]Independent clinical expertise, <em>embedded</em> exactly where your programme needs it.</h1>
+        <p class="lede hero-anim">[2.]Hands-on clinical and medical affairs support for biotech and pharma teams — from protocol design and KOL engagement to publication strategy and regulatory interactions. Grounded in Nordic and EU practice, with an Oxford research background.</p>
         <div class="hero-cta-group hero-anim">
           <a class="btn-tertiary" href="company.html">Read more about the company <span aria-hidden="true">→</span></a>
           <div class="hero-actions">
@@ -473,7 +469,7 @@
           </div>
         </div>
       </div>
-      <div class="hero-image placeholder-box hero-anim">IMAGE</div>
+      <img class="hero-image hero-anim" src="images/logo.png" alt="UzcaTech">
     </div>
   </div>
 </section>
@@ -482,42 +478,42 @@
   <div class="trail-layout">
     <div class="trail-content">
       <div class="trail-head reveal">
-        <div class="eyebrow">How engagements run</div>
-        <h2>Support mapped to where your programme actually is.</h2>
-        <p>Medical affairs needs change by phase — I work project-by-project or as ongoing embedded support, joining wherever the current gap is.</p>
+        <div class="eyebrow">[3.]How engagements run</div>
+        <h2>[4.]Support mapped to where your programme actually is.</h2>
+        <p>[5.]Medical affairs needs change by phase — I work project-by-project or as ongoing embedded support, joining wherever the current gap is.</p>
       </div>
       <div class="spine" id="spine">
         <div class="spine-fill" id="spine-fill"></div>
         <div class="phase reveal">
           <div class="phase-marker">I</div>
           <div class="phase-body">
-            <div class="tag">Early phase · I–II</div>
-            <h3>Protocol &amp; strategy design</h3>
-            <p>Working alongside your team from the earliest stages to shape study design, endpoints, and overall medical strategy so the programme starts on solid footing.</p>
+            <div class="tag">[6.]Early phase · I–II</div>
+            <h3>[7.]Protocol &amp; strategy design</h3>
+            <p>[8.]Working alongside your team from the earliest stages to shape study design, endpoints, and overall medical strategy so the programme starts on solid footing.</p>
           </div>
         </div>
         <div class="phase reveal">
           <div class="phase-marker">II</div>
           <div class="phase-body">
-            <div class="tag">Mid phase · II–III</div>
-            <h3>Medical &amp; scientific engagement</h3>
-            <p>Leading KOL engagement, advisory boards, and scientific communications as the programme moves toward pivotal data.</p>
+            <div class="tag">[9.]Mid phase · II–III</div>
+            <h3>[10.]Medical &amp; scientific engagement</h3>
+            <p>[11.]Leading KOL engagement, advisory boards, and scientific communications as the programme moves toward pivotal data.</p>
           </div>
         </div>
         <div class="phase reveal">
           <div class="phase-marker">III</div>
           <div class="phase-body">
-            <div class="tag">Late phase · III</div>
-            <h3>Regulatory &amp; publication support</h3>
-            <p>Supporting submission-ready documentation, medical writing, and publication planning as results mature.</p>
+            <div class="tag">[11.]Late phase · III</div>
+            <h3>[12.]Regulatory &amp; publication support</h3>
+            <p>[13]Supporting submission-ready documentation, medical writing, and publication planning as results mature.</p>
           </div>
         </div>
         <div class="phase reveal">
           <div class="phase-marker">IV</div>
           <div class="phase-body">
-            <div class="tag">Post-project · IV</div>
-            <h3>Post-approval &amp; lifecycle support</h3>
-            <p>Continued medical affairs input after launch — HCP education, real-world evidence generation, and lifecycle planning.</p>
+            <div class="tag">[14.]Post-project · IV</div>
+            <h3>[15.]Post-approval &amp; lifecycle support</h3>
+            <p>[16.]Continued medical affairs input after launch — HCP education, real-world evidence generation, and lifecycle planning.</p>
           </div>
         </div>
       </div>
@@ -530,9 +526,9 @@
   <div class="services-bg"></div>
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">What I do</div>
-      <h2>Clinical &amp; medical affairs, end to end.</h2>
-      <p>Engagements are scoped individually — a single deliverable, an interim role, or ongoing advisory support.</p>
+      <div class="eyebrow">[17.]What I do</div>
+      <h2>[18.]Clinical &amp; medical affairs, end to end.</h2>
+      <p>[19.]Engagements are scoped individually — a single deliverable, an interim role, or ongoing advisory support.</p>
     </div>
     <div class="service-scatter reveal" id="service-scatter">
       <svg class="service-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -545,43 +541,43 @@
       </svg>
       <div class="service-spine" id="service-spine"></div>
       <div class="service-spine-fill" id="service-spine-fill"></div>
-      <div class="service hub" style="left:52%; top:45%;"><h3>PharmaSciences</h3></div>
-      <div class="service" style="left:9%; top:30%;"><h3>Protocol design &amp; study strategy</h3><p>Study design, endpoints, and feasibility input from day one.</p></div>
-      <div class="service" style="left:25%; top:68%;"><h3>Medical monitoring &amp; clinical oversight</h3><p>Ongoing clinical review and safety oversight during trials.</p></div>
-      <div class="service" style="left:38%; top:8%;"><h3>KOL engagement &amp; advisory boards</h3><p>Identifying and coordinating key opinion leaders and panels.</p></div>
-      <div class="service" style="left:70%; top:82%;"><h3>Medical writing &amp; publications</h3><p>Manuscripts, abstracts, and scientific communications.</p></div>
-      <div class="service" style="left:80%; top:24%;"><h3>Regulatory &amp; scientific affairs support</h3><p>Medical input into submissions and agency interactions.</p></div>
-      <div class="service" style="left:92%; top:62%;"><h3>Interim &amp; embedded medical affairs roles</h3><p>Senior medical affairs capacity, without a full-time hire.</p></div>
+      <div class="service hub" style="left:52%; top:45%;"><h3>[20.]PharmaSciences</h3></div>
+      <div class="service" style="left:9%; top:30%;"><h3>[21.]Protocol design &amp; study strategy</h3><p>[22.]Study design, endpoints, and feasibility input from day one.</p></div>
+      <div class="service" style="left:25%; top:68%;"><h3>[23.]Medical monitoring &amp; clinical oversight</h3><p>[24.]Ongoing clinical review and safety oversight during trials.</p></div>
+      <div class="service" style="left:38%; top:8%;"><h3>[25.]KOL engagement &amp; advisory boards</h3><p>[26.]Identifying and coordinating key opinion leaders and panels.</p></div>
+      <div class="service" style="left:70%; top:82%;"><h3>[27.]Medical writing &amp; publications</h3><p>[28.]Manuscripts, abstracts, and scientific communications.</p></div>
+      <div class="service" style="left:80%; top:24%;"><h3>[29.]Regulatory &amp; scientific affairs support</h3><p>[30.]Medical input into submissions and agency interactions.</p></div>
+      <div class="service" style="left:92%; top:62%;"><h3>[31.]Interim &amp; embedded medical affairs roles</h3><p>[32.]Senior medical affairs capacity, without a full-time hire.</p></div>
     </div>
   </div>
 </section>
 
 <section class="experts" id="experts">
   <div class="wrap">
-    <div class="eyebrow reveal">Available now</div>
-    <h2 class="reveal">Looking for support?<span class="accent">Experts available now.</span></h2>
+    <div class="eyebrow reveal">[33.]Available now</div>
+    <h2 class="reveal">[34.]Looking for support?<span class="accent">[35.]Experts available now.</span></h2>
 
     <div class="expert-showcase reveal">
-      <div class="expert-photo placeholder-box">MOTHER'S<br>PROFILE PHOTO</div>
+      <img class="expert-photo" src="images/pfp.png" alt="Nathalie Uzcategui">
       <div class="expert-info">
-        <h3 class="expert-name">Nathalie Uzcat, MD/PhD</h3>
-        <div class="expert-role">Clinical &amp; Medical Affairs Consultant</div>
+        <h3 class="expert-name">[36.]Nathalie Uzcat, MD/PhD</h3>
+        <div class="expert-role">[37.]Clinical &amp; Medical Affairs Consultant</div>
         <a class="read-more" href="expert.html">Read more <span aria-hidden="true">→</span></a>
 
         <div class="expert-stats-row">
           <div class="expert-stat">
             <div class="num" data-count-to="15" data-suffix="+">0</div>
-            <div class="lbl">years of clinical &amp; medical affairs experience</div>
+            <div class="lbl">[38.]years of clinical &amp; medical affairs experience</div>
           </div>
           <div class="expert-stat">
-            <div class="languages-list">Swedish, Spanish, English</div>
-            <div class="lbl">languages spoken</div>
+            <div class="languages-list">[39.]Swedish, Spanish, English</div>
+            <div class="lbl">[40.]languages spoken</div>
           </div>
         </div>
 
         <div class="expert-details">
           <div class="expert-logos-block">
-            <div class="logos-label">Formal education</div>
+            <div class="logos-label">[41.]Formal education</div>
             <div class="logo-row">
               <div class="inst-logo placeholder-box">UNIVERSITY<br>LOGO 1</div>
               <div class="inst-logo placeholder-box">UNIVERSITY<br>LOGO 2</div>
@@ -590,7 +586,7 @@
           </div>
 
           <div class="expert-logos-block">
-            <div class="logos-label">Previous companies</div>
+            <div class="logos-label">[42.]Previous companies</div>
             <div class="logo-row">
               <div class="inst-logo placeholder-box">COMPANY<br>LOGO 1</div>
               <div class="inst-logo placeholder-box">COMPANY<br>LOGO 2</div>
@@ -617,17 +613,17 @@
 <section class="contact" id="contact">
   <div class="wrap">
     <div class="contact-lead reveal">
-      <div class="eyebrow">Contact</div>
-      <h2>Have a study that needs support from a professional consultancy?</h2>
+      <div class="eyebrow">[43.]Contact</div>
+      <h2>[44.]Have a study that needs support from a professional consultancy?</h2>
     </div>
     <div class="contact-grid">
     <div class="contact-info reveal">
-      <p>Reach out directly, or use the form — every message is emailed to me directly and I reply within two business days.</p>
+      <p>[45.]Reach out directly, or use the form — every message is emailed to me directly and I reply within two business days.</p>
       <div class="contact-detail">
-        <div><span>Email</span><span>Joelcastuzca@hotmail.com</span></div>
-        <div><span>Phone</span><span>[+46 XX XXX XX XX]</span></div>
-        <div><span>Location</span><span>Staffanstorp, Sweden — remote consultancy</span></div>
-        <div><span>LinkedIn</span><span>linkedin.com/in/yourlink</span></div>
+        <div><span>Email</span><span>[46.]Joelcastuzca@hotmail.com</span></div>
+        <div><span>Phone</span><span>[47.][+46 XX XXX XX XX]</span></div>
+        <div><span>Location</span><span>[48.]Staffanstorp, Sweden — remote consultancy</span></div>
+        <div><span>LinkedIn</span><span>[49.]linkedin.com/in/yourlink</span></div>
       </div>
     </div>
 
@@ -651,7 +647,7 @@
 
 <footer>
   <div class="wrap footer-row">
-    <div class="mono">© 2026 UzcaTech AB — Clinical &amp; Medical Affairs Consulting</div>
+    <div class="mono">[50.]© 2026 UzcaTech AB — Clinical &amp; Medical Affairs Consulting</div>
     <ul class="footer-links">
       <li><a href="#services">Services</a></li>
       <li><a href="#experts">Experts</a></li>
