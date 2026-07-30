@@ -189,20 +189,22 @@
 
   /* ---- Scroll-scrubbed frame animation (replaces the old static .trail-image) ---- */
   .trail-frames-wrap{
-    height: 300vh; /* taller = slower/longer scroll animation, adjust to taste */
     position: relative;
-    margin-right: 64px;
-  }
-  .trail-frames-sticky{
-    position: sticky;
-    top: 0;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     min-height: 480px;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
+    margin-right: 64px;
     border-radius: var(--radius-lg);
-    background: rgba(255,255,255,0.03);
+    overflow: hidden;
+    background: var(--navy);
+  }
+  /* Vignette to blend rough frame edges into the navy section background */
+  .trail-frames-wrap::after{
+    content:"";
+    position:absolute; inset:0;
+    border-radius:inherit;
+    box-shadow: inset 0 0 90px 55px var(--navy);
+    pointer-events:none;
   }
   #trail-frames-canvas{
     width: 100%;
@@ -211,8 +213,7 @@
     display: block;
   }
   @media (max-width:1000px){
-    .trail-frames-wrap{ height: 200vh; margin-right:0; margin-top:8px; }
-    .trail-frames-sticky{ height: auto; aspect-ratio: 4/3; min-height:0; }
+    .trail-frames-wrap{ margin-right:0; margin-top:8px; height: auto; aspect-ratio: 4/3; min-height:0; }
   }
   @media (max-width:640px){
     .trail-frames-wrap{ display:none; }
@@ -549,9 +550,7 @@
 
     <!-- Scroll-scrubbed frame animation replaces the old static trail image -->
     <div class="trail-frames-wrap reveal" id="trail-frames-wrap">
-      <div class="trail-frames-sticky">
-        <canvas id="trail-frames-canvas"></canvas>
-      </div>
+      <canvas id="trail-frames-canvas"></canvas>
     </div>
   </div>
 </section>
@@ -807,7 +806,7 @@
   // ---- Scroll-scrubbed frame animation for the "How engagements run" section ----
   (function(){
     const frameCount = 240; // <-- change this to your actual number of frames
-    const framePath = i => `images/animation_frames/ezgif-frame-${String(i).padStart(4,'0')}.jpg`;
+    const framePath = i => `images/animation_frames/ezgif-frame-${String(i).padStart(3,'0')}.png`;
 
     const canvas = document.getElementById('trail-frames-canvas');
     if (!canvas) return;
@@ -834,9 +833,14 @@
     let trailTicking = false;
     function updateTrailFrame(){
       const rect = wrap.getBoundingClientRect();
-      const scrollableDist = rect.height - window.innerHeight;
-      if (scrollableDist <= 0){ trailTicking = false; return; }
-      const progress = Math.min(Math.max(-rect.top / scrollableDist, 0), 1);
+      const viewportH = window.innerHeight;
+      // progress = 0 the moment the element's top enters the bottom of the
+      // viewport, progress = 1 the moment its bottom leaves the top of the
+      // viewport — so it starts as soon as it's visible and spans exactly
+      // its own natural scroll length (which matches the section height).
+      const total = rect.height + viewportH;
+      let progress = (viewportH - rect.top) / total;
+      progress = Math.min(Math.max(progress, 0), 1);
       const frameIndex = Math.floor(progress * (frameCount - 1));
       drawTrailFrame(frameIndex);
       trailTicking = false;
