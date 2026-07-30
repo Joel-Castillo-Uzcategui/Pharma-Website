@@ -134,7 +134,7 @@
   @media (max-width:640px){
     .hero-image{display:none;}
   }
-  .hero-image{width:100%; aspect-ratio:4/5; border-radius:var(--radius-lg);}
+  .hero-image{width:100%; aspect-ratio:4/5; border-radius:var(--radius-lg); object-fit:cover;}
   .eyebrow{
     font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em;
     text-transform:uppercase; color:var(--teal); margin-bottom:18px; display:flex; align-items:center; gap:10px;
@@ -190,8 +190,7 @@
     width:100%; height:100%; min-height:480px;
     margin-right:64px;
     border-radius:var(--radius-lg);
-    background-size:cover; background-position:center;
-    border-color:rgba(255,255,255,0.35); color:rgba(255,255,255,0.7); background-color:rgba(255,255,255,0.06);
+    object-fit:cover;
   }
   @media (max-width:1000px){
     .trail-image{height:auto; aspect-ratio:4/3; min-height:0; margin-top:8px; margin-right:0; border-radius:var(--radius-lg);}
@@ -343,8 +342,8 @@
   .expert-photo{
     width:100%; aspect-ratio:7/10; max-width:420px;
     border-radius:260px 260px var(--radius-md) var(--radius-md);
-    border:1px dashed rgba(255,255,255,0.35); color:rgba(255,255,255,0.7);
-    background:rgba(255,255,255,0.06); filter:grayscale(55%) contrast(1.02);
+    object-fit:cover;
+    filter:grayscale(55%) contrast(1.02);
   }
   .expert-info{padding-top:8px;}
   .expert-name{font-size:28px; color:var(--teal);}
@@ -371,17 +370,27 @@
     letter-spacing:0.06em; color:rgba(255,255,255,0.55); margin-bottom:12px;
   }
   .logo-row{display:flex; gap:14px; flex-wrap:wrap;}
-  .inst-logo{width:92px; height:56px; font-size:9.5px; flex-shrink:0; border-color:rgba(255,255,255,0.35); color:rgba(255,255,255,0.7); background:rgba(255,255,255,0.06);}
+  .inst-logo{
+    width:165px; height:96px; flex-shrink:0;
+    object-fit:contain;
+    padding:6px;
+  }
   @media (max-width:640px){
     .logo-row{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px;}
-    .inst-logo{width:100%; height:64px;}
+    .inst-logo{width:100%; height:96px;}
   }
 
   .cert-bar{
     margin-top:64px; padding-top:32px; border-top:1px solid rgba(255,255,255,0.18);
     display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;
   }
-  .cert-item{width:150px; height:56px; font-size:10px; flex-shrink:0; border-color:rgba(255,255,255,0.35); color:rgba(255,255,255,0.7); background:rgba(255,255,255,0.06);}
+  .cert-item{
+    width:150px; height:56px; flex-shrink:0;
+    object-fit:contain;
+    background:rgba(255,255,255,0.9);
+    border-radius:8px;
+    padding:14px;
+  }
   @media (max-width:640px){
     .cert-bar{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px;}
     .cert-item{width:100%; height:64px;}
@@ -469,7 +478,7 @@
           </div>
         </div>
       </div>
-      <img class="hero-image hero-anim" src="images/logo.png" alt="UzcaTech">
+      <img class="hero-image hero-anim" src="images/hero.jpg" alt="Clinical consultant reviewing study documents">
     </div>
   </div>
 </section>
@@ -518,7 +527,7 @@
         </div>
       </div>
     </div>
-    <div class="trail-image placeholder-box reveal">IMAGE</div>
+    <img class="trail-image reveal" src="images/trail.jpg" alt="Clinical team collaborating during a study phase">
   </div>
 </section>
 
@@ -579,19 +588,19 @@
           <div class="expert-logos-block">
             <div class="logos-label">[41.]Formal education</div>
             <div class="logo-row">
-              <div class="inst-logo placeholder-box">UNIVERSITY<br>LOGO 1</div>
-              <div class="inst-logo placeholder-box">UNIVERSITY<br>LOGO 2</div>
-              <div class="inst-logo placeholder-box">UNIVERSITY<br>LOGO 3</div>
+              <img class="inst-logo" src="images/oxford_logo.png" alt="University of Oxford logo">
+              <img class="inst-logo" src="images/ivic_logo.png" alt="IVIC logo">
+              <img class="inst-logo" src="images/usb_logo.png" alt="usb logo">
             </div>
           </div>
 
           <div class="expert-logos-block">
             <div class="logos-label">[42.]Previous companies</div>
             <div class="logo-row">
-              <div class="inst-logo placeholder-box">COMPANY<br>LOGO 1</div>
-              <div class="inst-logo placeholder-box">COMPANY<br>LOGO 2</div>
-              <div class="inst-logo placeholder-box">COMPANY<br>LOGO 3</div>
-              <div class="inst-logo placeholder-box">COMPANY<br>LOGO 4</div>
+              <img class="inst-logo" src="images/hansa_logo.png" alt="hansa logo">
+              <img class="inst-logo" src="images/bioinvent_logo.png" alt="bioinvent logo">
+              <img class="inst-logo" src="images/svar_logo.png" alt="svar logo">
+              <img class="inst-logo" src="images/zoetis_logo.png" alt="zoetis logo">
             </div>
           </div>
         </div>
@@ -599,12 +608,12 @@
     </div>
 
     <div class="cert-bar reveal">
-      <div class="cert-item placeholder-box">CERT 1</div>
-      <div class="cert-item placeholder-box">CERT 2</div>
-      <div class="cert-item placeholder-box">CERT 3</div>
-      <div class="cert-item placeholder-box">CERT 4</div>
-      <div class="cert-item placeholder-box">CERT 5</div>
-      <div class="cert-item placeholder-box">CERT 6</div>
+      <img class="cert-item" src="images/cert-1.png" alt="Certification 1">
+      <img class="cert-item" src="images/cert-2.png" alt="Certification 2">
+      <img class="cert-item" src="images/cert-3.png" alt="Certification 3">
+      <img class="cert-item" src="images/cert-4.png" alt="Certification 4">
+      <img class="cert-item" src="images/cert-5.png" alt="Certification 5">
+      <img class="cert-item" src="images/cert-6.png" alt="Certification 6">
     </div>
   </div>
 </section>
