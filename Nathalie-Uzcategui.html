@@ -35,13 +35,6 @@
   .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
   @media (max-width:640px){ .wrap{padding:0 20px;} }
 
-  .placeholder-box{
-    display:flex; align-items:center; justify-content:center; text-align:center;
-    border:1px dashed var(--slate); background:rgba(92,112,134,0.06);
-    color:var(--slate); font-family:'IBM Plex Mono',monospace; font-size:11px;
-    letter-spacing:0.04em; line-height:1.5; padding:8px; border-radius:var(--radius-sm);
-  }
-
   /* ---------- Header ---------- */
   header{
     position:sticky; top:0; z-index:50;
@@ -58,7 +51,7 @@
   .back-link:hover{color:var(--teal);}
 
   /* ---------- Bio hero ---------- */
-  .bio{padding:72px 0 100px;}
+  .bio{padding:72px 0 4px;}
   .bio-layout{
     display:grid; grid-template-columns:1.2fr 0.8fr; gap:64px; align-items:start;
   }
@@ -85,7 +78,7 @@
   .bio-side{padding-top:2px;}
   /* Replace with: <img class="bio-photo" src="nathalie-portrait.jpg" alt="Nathalie Uzcat"> */
   .bio-photo{
-    width:100%; aspect-ratio:4/5;
+    width:100%; aspect-ratio:7/10;
     border-radius:260px 260px var(--radius-md) var(--radius-md);
     filter:grayscale(15%) contrast(1.02);
   }
@@ -113,11 +106,16 @@
     height:56px; 
     font-size:9.5px; 
     flex-shrink:0;
+    object-fit:contain;
+    object-position:center;
+  }
+  .usb-correction{
+    transform:scale(1.5);
   }
 
   @media (max-width:640px){
     .logo-row{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px;}
-    .inst-logo{width:100%; height:64px;}
+    .inst-logo{width:100%; height:64px; object-fit:contain;}
   }
 
   /* ---------- Certifications ---------- */
@@ -125,21 +123,20 @@
     padding:24px 0 100px;
   }
   .certifications .eyebrow{margin-bottom:24px;}
-  .cert-bar{
+
+  /* Styled to match the "Certifications" treatment on index.html:
+     mono label + top divider + read-more-style link spacing */
+  .cert-summary{
     padding-top:32px; border-top:1px solid var(--line);
-    display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;
+    display:flex; flex-direction:column; align-items:flex-start; gap:10px;
   }
-  .cert-item{width:150px; height:56px; font-size:10px; flex-shrink:0;}
-  @media (max-width:640px){
-    .cert-bar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
-    flex-wrap:wrap;
+  .cert-summary .logos-label{margin-bottom:0;}
+  .cert-summary .read-more{margin-top:0;}
+  .read-more{
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--teal); font-weight:600; font-size:15px; text-decoration:none; transition:gap .15s ease;
   }
-    .cert-item{width:100%; height:64px;}
-  }
+  .read-more:hover{gap:12px;}
 
   footer{border-top:1px solid var(--line); padding:36px 0;}
   .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
@@ -154,7 +151,7 @@
 <header>
   <div class="wrap nav">
     <div class="brand">
-      <div class="logo-slot placeholder-box">LOGO</div>
+      <img class="logo-slot" src="images/logo.png">
       UzcaTech AB
     </div>
     <a class="back-link" href="../index.html"><span aria-hidden="true">←</span> Back to home</a>
@@ -179,24 +176,24 @@
 
       <div class="bio-side">
         <!-- Replace with: <img class="bio-photo" src="nathalie-portrait.jpg" alt="Nathalie Uzcat"> -->
-        <div class="bio-photo placeholder-box">NATHALIE'S<br>PROFILE PHOTO</div>
+        <img class="bio-photo" src="images/pfp.png">
 
         <div class="bio-credentials-block">
           <!-- Replace each placeholder-box with: <img class="inst-logo" src="..." alt="University name"> -->
           <div class="logos-label">Formal education</div>
           <div class="logo-row">
-            <div class="inst-logo placeholder-box">UNIVERSITY<br>LOGO 1</div>
-            <div class="inst-logo placeholder-box">UNIVERSITY<br>LOGO 2</div>
-            <div class="inst-logo placeholder-box">UNIVERSITY<br>LOGO 3</div>
+            <img class="inst-logo usb-correction" src="images/oxford_logo.png">
+            <img class="inst-logo usb-correction" src="images/ivic_logo.png">
+            <img class="inst-logo" src="images/usb_logo.png">
           </div>
 
           <!-- Replace each placeholder-box with: <img class="inst-logo" src="..." alt="Company name"> -->
           <div class="logos-label">Previous companies</div>
           <div class="logo-row">
-            <div class="inst-logo placeholder-box">COMPANY<br>LOGO 1</div>
-            <div class="inst-logo placeholder-box">COMPANY<br>LOGO 2</div>
-            <div class="inst-logo placeholder-box">COMPANY<br>LOGO 3</div>
-            <div class="inst-logo placeholder-box">COMPANY<br>LOGO 4</div>
+            <img class="inst-logo" src="images/hansa_logo.png" alt="hansa logo">
+            <img class="inst-logo" src="images/bioinvent_logo.png" alt="bioinvent logo">
+            <img class="inst-logo" src="images/svar_logo.png" alt="svar logo">
+            <img class="inst-logo" src="images/zoetis_logo.png" alt="zoetis logo">
           </div>
         </div>
       </div>
@@ -205,17 +202,11 @@
   </div>
 </section>
 
-<section class="certifications">
+<section class="certifications" id="certifications">
   <div class="wrap">
-    <div class="eyebrow">Certifications</div>
-    <!-- Replace each placeholder-box with: <img class="cert-item" src="..." alt="Certification name"> -->
-    <div class="cert-bar">
-      <div class="cert-item placeholder-box">CERT 1</div>
-      <div class="cert-item placeholder-box">CERT 2</div>
-      <div class="cert-item placeholder-box">CERT 3</div>
-      <div class="cert-item placeholder-box">CERT 4</div>
-      <div class="cert-item placeholder-box">CERT 5</div>
-      <div class="cert-item placeholder-box">CERT 6</div>
+    <div class="cert-summary">
+      <div class="logos-label">&mdash; Certifications</div>
+      <a class="read-more" href="../certificates.html">See certificates <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
