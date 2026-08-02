@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certifications — UzcaTech AB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+  rel="stylesheet"
+>
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/certificates.css">
+</head>
+<body>
+
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <img class="logo-slot" src="images/logo.png" alt="UzcaTech AB">
+        UzcaTech AB
+      </div>
+      <a class="back-link" href="experts/nathalie-uzcategui.html"><span aria-hidden="true">←</span> Back to profile</a>
+    </div>
+  </header>
+
+  <section class="page-head">
+    <div class="wrap">
+      <div class="page-head-columns">
+        <div>
+          <div class="eyebrow">Certifications archive</div>
+          <h1>Every certificate, in one place.</h1>
+          <p>
+            Browse the full archive of formal qualifications and certifications, grouped by
+            issuing institution. Search by name, institution, or year.
+          </p>
+
+          <div class="archive-notice">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="13"/>
+              <circle cx="12" cy="16.5" r="0.5" fill="currentColor" stroke="none"/>
+            </svg>
+            <p>
+              For verification and confidentiality reasons, the certificate files themselves
+              aren't published here. If you'd like to view or verify a specific certificate,
+              please <a href="index.html#contact">get in touch</a> and we'll be happy to share
+              it directly.
+            </p>
+          </div>
+        </div>
+
+        <img class="page-head-image" src="images/logo.png" alt="UzcaTech AB">
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="controls">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" id="search" placeholder="Search certificates…" autocomplete="off">
+        <button type="button" id="search-clear" class="search-clear" aria-label="Clear search">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="toggle-all-row">
+      <div class="result-count" id="result-count"></div>
+      <div class="toggle-all-links">
+        <button type="button" id="open-all" class="toggle-all-btn">Open all</button>
+        <span class="toggle-all-divider">·</span>
+        <button type="button" id="close-all" class="toggle-all-btn">Close all</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="archive">
+    <div class="wrap" id="archive-root"></div>
+  </section>
+
+  <footer>
+    <div class="wrap footer-row">
+      <div class="mono">© 2026 UzcaTech AB — Clinical &amp; Medical Affairs Consulting</div>
+      <ul class="footer-links">
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#experts">Experts</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/certificates-data.js" defer></script>
+<script src="js/certificates.js" defer></script>
+
+</body>
+</html>

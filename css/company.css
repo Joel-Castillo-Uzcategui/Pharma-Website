@@ -1,0 +1,24 @@
+/* ==========================================================================
+   company.css
+   Styles specific to company.html (About page bio-style layout).
+   Requires base.css to be loaded first.
+   ========================================================================== */
+
+  /* Bio-style text block */
+  .bio{padding:72px 0 100px;}
+  .bio .wrap{max-width:1400px;}
+  .bio-layout{
+    display:grid; grid-template-columns:1fr minmax(0,760px) 1fr; gap:48px; align-items:stretch;
+  }
+  @media (max-width:1100px){
+    .bio-layout{grid-template-columns:1fr;}
+    .bio-side{display:none;}
+  }
+  .bio-side-image{
+    width:100%; height:100%; min-height:520px; border-radius:32px;
+    background-size:cover; background-position:center;
+  }
+  .bio-name{font-size:clamp(36px, 5vw, 52px); color:var(--teal); line-height:1.05;}
+  .bio-credentials{font-size:clamp(22px, 3vw, 30px); color:var(--navy); font-weight:600; margin-top:10px; line-height:1.25;}
+  .bio-text{margin-top:32px;}
+  .bio-text p{color:var(--navy-soft); font-size:16.5px; margin:0 0 22px 0;}

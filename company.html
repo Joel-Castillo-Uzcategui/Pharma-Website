@@ -7,80 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --navy:#0F3D4A;
-    --navy-soft:#3A6B78;
-    --slate:#5F8087;
-    --bg:#F5FBF9;
-    --bg-panel:#E5F3EE;
-    --teal:#2F9E6F;
-    --teal-soft:#DCF0E6;
-    --ink:#16262A;
-    --line:#D3E6E0;
-    --white:#FFFFFF;
-    --radius-sm:10px;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0; background:var(--bg); color:var(--ink);
-    font-family:'IBM Plex Sans', sans-serif; font-size:16px; line-height:1.7;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3{font-family:'Fraunces', serif; font-weight:450; color:var(--navy); margin:0; letter-spacing:-0.01em;}
-  a{color:inherit;}
-  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
-  @media (max-width:640px){ .wrap{padding:0 20px;} }
-
-  .placeholder-box{
-    display:flex; align-items:center; justify-content:center; text-align:center;
-    border:1px dashed var(--slate); background:rgba(92,112,134,0.06);
-    color:var(--slate); font-family:'IBM Plex Mono',monospace; font-size:11px;
-    letter-spacing:0.04em; line-height:1.5; padding:8px; border-radius:var(--radius-sm);
-  }
-
-  /* ---------- Header ---------- */
-  header{
-    position:sticky; top:0; z-index:50;
-    background:rgba(245,251,249,0.92); backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 0;}
-  .brand{font-family:'Fraunces', serif; font-size:19px; color:var(--navy); display:flex; align-items:center; gap:10px;}
-  .brand .logo-slot{width:34px; height:34px; flex-shrink:0; font-size:9px;}
-  .back-link{
-    display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:500;
-    color:var(--navy-soft); text-decoration:none; transition:color .15s ease;
-  }
-  .back-link:hover{color:var(--teal);}
-
-  /* ---------- Bio-style text block ---------- */
-  .bio{padding:72px 0 100px;}
-  .bio .wrap{max-width:1400px;}
-  .bio-layout{
-    display:grid; grid-template-columns:1fr minmax(0,760px) 1fr; gap:48px; align-items:stretch;
-  }
-  @media (max-width:1100px){
-    .bio-layout{grid-template-columns:1fr;}
-    .bio-side{display:none;}
-  }
-  /* Replace with: <img class="bio-side-image" src="..." alt="..."> */
-  .bio-side-image{
-    width:100%; height:100%; min-height:520px; border-radius:32px;
-    background-size:cover; background-position:center;
-  }
-  .bio-name{font-size:clamp(36px, 5vw, 52px); color:var(--teal); line-height:1.05;}
-  .bio-credentials{font-size:clamp(22px, 3vw, 30px); color:var(--navy); font-weight:600; margin-top:10px; line-height:1.25;}
-  .bio-text{margin-top:32px;}
-  .bio-text p{color:var(--navy-soft); font-size:16.5px; margin:0 0 22px 0;}
-
-  footer{border-top:1px solid var(--line); padding:36px 0;}
-  .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
-  .footer-row .mono{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--slate);}
-  .footer-links{display:flex; gap:22px; list-style:none; padding:0; margin:0;}
-  .footer-links a{font-size:13px; color:var(--slate); text-decoration:none;}
-  .footer-links a:hover{color:var(--teal);}
-</style>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/company.css">
 </head>
 <body>
 
@@ -97,23 +25,20 @@
 <section class="bio">
   <div class="wrap">
     <div class="bio-layout">
-      <!-- Replace with: <img class="bio-side-image" src="images/company-left.jpg" alt="..."> -->
-      <div class="bio-side"><div class="bio-side-image placeholder-box">IMAGE</div></div>
+      <img class="bio-side" class="bio-side-image" src="images/logo.png">
 
       <div class="bio-center">
         <h1 class="bio-name">UzcaTech AB</h1>
         <div class="bio-credentials">Independent clinical &amp; medical affairs consultancy</div>
 
         <div class="bio-text">
-          <!-- Placeholder copy — replace with the real company story/positioning -->
           <p>UzcaTech AB is a Swedish clinical and medical affairs consultancy built around a simple idea: biotech and pharma teams should be able to bring in senior, independent expertise exactly where and when a programme needs it, without committing to a full-time hire. Engagements can be a single deliverable, an interim role, or ongoing advisory support, scoped to whatever gap actually exists.</p>
           <p>The consultancy works across the full lifecycle of a programme — from early protocol and study design, through KOL engagement and medical/scientific communications, to regulatory-facing documentation and post-approval lifecycle support. Each engagement is grounded in Nordic and EU practice and shaped around the sponsor's own timelines, team, and internal processes.</p>
           <p>UzcaTech is built to scale with demand: it currently draws on a small, hand-selected roster of independent experts, starting with its founding consultant, and grows deliberately as new engagements call for additional specialist coverage.</p>
         </div>
       </div>
 
-      <!-- Replace with: <img class="bio-side-image" src="images/company-right.jpg" alt="..."> -->
-      <div class="bio-side"><div class="bio-side-image placeholder-box">IMAGE</div></div>
+      <img class="bio-side" class="bio-side-image" src="images/logo.png">
     </div>
   </div>
 </section>
